@@ -1165,35 +1165,92 @@ int main(){
 
 
 
+/*2309
+#include <iostream>
+#include <algorithm>
 
+#define check 43214324
+using namespace std;
+
+int main(){
+    
+    int input[9];
+    int sum = 0;
+    for(int i = 0; i<9; i++){
+        cin >> input[i];
+    }
+    
+    for(int i = 0; i<9; i++){
+        sum += input[i];
+    }
+    
+    
+    for(int i = 0; i<9; i++){
+        for(int k = i+1; k<9; k++){
+            if(sum - input[i] - input[k] == 100){
+                input[i] = check;
+                input[k] = check;
+                sort(input, input+9);
+                for(int i = 0; i<9; i++){
+                    if(input[i] != check)
+                        cout << input[i] << endl;
+                }
+                return 0;
+            }
+        }
+    }
+    
+    
+    
+    
+    
+}
+*/
+
+
+
+
+/*2292
 #include <iostream>
 
 using namespace std;
 
 int main(){
     
-    int n,k;
-    int input[3001];
-    cin >> n >> k;
     
+    int input;
+    int start = 1;
+    int result = 1;
+    int acceleration = 6;
+    cin >> input;
+
     
-    for(int i = 1; i<=n; i++){
-        cin >> input[i];
+    while(1){
+        
+        
+        if(input <= start){
+            cout << result;
+            return 0;
+        }
+        
+        start += acceleration;
+        acceleration += 6;
+        result++;
+        
+        
     }
     
-    if(n == k){
-        cout << 0;
-        return 0;
-    }
-    if(k == 1){
-        cout << input[n] - input[1];
-        return 0;
-    }
     
     
-    cout << input[n-k+1] - input[1];
+    
+    
     
     
     
     return 0;
 }
+
+
+
+
+*/
