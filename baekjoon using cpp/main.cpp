@@ -1303,7 +1303,7 @@ int main() {
 */
 
 
-
+/*
 #include <iostream>
 #include <algorithm>
 
@@ -1369,3 +1369,82 @@ int main() {
 }
 
 
+*/
+
+
+
+
+#include <iostream>
+#include <algorithm>
+
+//boj 2630
+using namespace std;
+
+int map[129][129] = { 0, };
+int white = 0;
+int blue = 0;
+
+
+bool check(int x, int y, int width) {
+   
+    int temp = map[x][y];
+    
+    for (int i = x; i < x + width; ++i) {
+        for (int j = y; j < y + width; ++j) {
+            if (temp != map[i][j])
+                return false;
+        }
+    }
+       
+    return true;
+   
+}
+
+
+void solve(int x, int y, int width) {
+
+    if (check(x, y, width)) {
+        if (map[x][y] == 0) {
+            ++white;
+        }
+
+        else if (map[x][y] == 1) {
+            ++blue;
+        }
+    }
+
+    else {
+        solve(x, y, width / 2);
+        solve(x + width / 2, y, width / 2);
+        solve(x, y + width / 2, width / 2);
+        solve(x + width / 2, y + width / 2, width / 2);
+
+
+        }
+          
+}
+
+
+int main() {
+
+
+    int width;
+    cin >> width;
+
+    for (int i = 1; i <= width; ++i) {
+        for (int j = 1; j <= width; ++j) {
+            cin >> map[i][j];
+
+        }
+    }
+
+    solve(1, 1, width);
+
+    cout << white << endl << blue;
+
+
+
+
+    return 0;
+
+}
