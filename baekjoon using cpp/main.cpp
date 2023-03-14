@@ -1254,3 +1254,118 @@ int main(){
 
 
 */
+
+/*#include <bits/stdc++.h>
+//boj 6603
+using namespace std;
+
+
+int list[14] = { 0, };
+int input;
+int solve[6] = { 0, };
+
+void dfs(int start, int depth) {
+
+	if (depth == 6) {
+		for (int i = 0; i < 6; ++i) {
+			cout << solve[i] << " ";
+		}
+		cout << '\n';
+		return;
+	}
+
+	for (int i = start; i < input; ++i) {
+		solve[depth] = list[i + 1];
+		dfs(i + 1, depth + 1);
+	
+	}
+
+}
+
+
+
+int main() {
+
+	while (1)
+	{
+		cin >> input;
+		if (input == 0) {
+			break;
+		}
+		for (int i = 0; i < input; ++i) {
+			cin >> list[i + 1];
+		}
+		dfs(0, 0);
+		cout << "\n";
+	}
+	return 0;
+}
+*/
+
+
+
+#include <iostream>
+#include <algorithm>
+
+//boj 1780
+using namespace std;
+
+int map[2190][2190] = { 0, };
+int negative = 0;
+int zero = 0;
+int positive = 0;
+
+bool check(int x, int y, int input, int num) {
+
+	for (int i = 0; i < input; ++i) {
+		for (int j = 0; j < input; ++j) {
+			if (num != map[x + i][y + j])
+				return false;
+		}
+	}
+	return true;
+	
+}
+void solve(int x, int y, int input)
+{
+	if (check(x, y, input, map[x][y])) {
+		if (map[x][y] == 0)
+			++zero;
+		else if (map[x][y] == 1)
+			++positive;
+		else if (map[x][y] == -1)
+			++negative;
+	}
+
+	else {
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 3; ++j) {
+				solve(x + input / 3 * i, y + input / 3 * j, input / 3);
+			}
+		}
+	}
+
+	
+}
+
+int main() {
+
+	int input;
+
+	cin >> input;
+
+	for (int i = 1; i <= input; ++i) {
+		for (int j = 1; j <= input; ++j) {
+			cin >> map[i][j];
+		}
+	}
+
+	solve(1,1,input);
+
+	cout << negative << endl << zero << endl << positive;
+
+	return 0;
+
+}
+
+
