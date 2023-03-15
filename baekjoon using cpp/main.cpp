@@ -1373,7 +1373,7 @@ int main() {
 
 
 
-
+/*
 #include <iostream>
 #include <algorithm>
 
@@ -1447,4 +1447,32 @@ int main() {
 
     return 0;
 
+}
+
+*/
+
+
+#include <iostream>
+#include <algorithm>
+//boj 18222
+using namespace std;
+
+long long solve(long long input) {
+
+    
+    if (input == 1)
+        return 0;
+    long long i;
+    for (i = 1; i + i < input; i += i); 
+    return !solve(input - i);
+
+}
+
+
+int main() {
+    long long input;
+    cin >> input;
+
+    cout << solve(input);
+    return 0;
 }
