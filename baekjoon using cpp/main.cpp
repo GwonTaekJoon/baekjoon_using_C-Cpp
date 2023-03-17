@@ -1451,7 +1451,7 @@ int main() {
 
 */
 
-
+/*
 #include <iostream>
 #include <algorithm>
 //boj 18222
@@ -1476,3 +1476,72 @@ int main() {
     cout << solve(input);
     return 0;
 }
+
+*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+//boj 16974
+using namespace std;
+
+
+long long e_p = 0;
+long long patty[51] = {1, };
+long long sum[51] = {1, };
+
+void solve(long long layer, long long eat) {
+    if (eat == 0) {                         
+        cout << e_p;
+        return;
+    }
+
+    else if (layer == 0)
+    {
+        ++e_p;
+        cout << e_p;
+        return;
+    }
+        
+
+    --eat;
+    if (eat == sum[layer - 1]) {
+        e_p += patty[layer - 1];
+        eat -= sum[layer - 1];
+        solve(layer - 1, eat);
+    }
+    else if (eat < sum[layer - 1]) {
+        solve(layer - 1, eat);
+    }
+
+    else if (eat > sum[layer - 1]) {
+        e_p += patty[layer - 1] + 1;
+        eat -= sum[layer - 1] + 1;
+        solve(layer - 1, eat);
+    }
+
+
+}
+
+int main() {
+
+    
+    long long layer;
+    long long eat;
+    cin >> layer >> eat;
+    
+
+    for (int i = 1; i <= layer; ++i) {
+        sum[i] = sum[i - 1] * 2 + 3;
+        patty[i] = patty[i - 1] * 2 + 1;
+    }
+
+    solve(layer, eat);
+
+
+
+
+    return 0;
+}
+*/
