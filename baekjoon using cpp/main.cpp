@@ -1545,3 +1545,147 @@ int main() {
     return 0;
 }
 */
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <string>
+//boj 12919
+using namespace std;
+
+string tmp = "";
+
+void solve(string input, string cmp) {
+
+    if (input == cmp) {
+        cout << "1";
+        return;
+    }
+
+    if (input.length() >= cmp.length()) {
+        cout << "0";
+        return;
+    }
+
+    if (cmp[cmp.size() - 1] == 'A') {
+        tmp = cmp;
+        tmp.erase(tmp.size() - 1);
+        solve(input, tmp);
+    }
+
+    if (cmp[0] == 'B') {
+        tmp = cmp;
+        tmp.erase(tmp.begin());
+        reverse(tmp.begin(), tmp.end());
+        solve(input, tmp);
+    }
+
+}
+int main() {
+
+    string input;
+    string cmp;
+    
+    cin >> input;
+    cin >> cmp;
+
+    solve(input, cmp);
+    
+    return 0;
+}
+*/
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <queue>
+#include <cstring>
+//boj 1012
+using namespace std;
+
+int map[50][50] = {0,};
+int c[50][50] = { 0, };
+int M, N;
+int cnt;
+int dir[4][2] = { 
+    {-1,0} , 
+    {0,1}, 
+    {0,-1} , 
+    {1,0} };
+bool isInside(int x, int y) {
+    return (x >= 0 && x < M) && (y >= 0 && y < N);
+}
+
+void bfs(int row, int col) {
+
+    int cur_row = row; 
+    int cur_col = col;
+    queue<pair<int,int>> q;
+    q.push(pair<int, int> (cur_row,cur_col));
+
+    c[cur_row][cur_col] = 1;
+
+    while (!q.empty()) {
+    
+        cur_row = q.front().first;
+        cur_col = q.front().second;
+        q.pop();
+
+        for (size_t i = 0; i < 4; ++i) {
+            int next_row = cur_row + dir[i][0];
+            int next_col = cur_col + dir[i][1];
+            
+            if (isInside(next_row, next_col) && c[next_row][next_col] == 0 && map[next_row][next_col] == 1) {
+                c[next_row][next_col] = 1;
+                q.push(pair<int, int>(next_row, next_col));
+            }
+
+        }
+
+
+
+    }
+
+
+}
+int main() {
+
+    int T, cabbage;
+    cin >> T;
+    int x, y;
+    
+    for (size_t i = 0; i < T; ++i) {
+        memset(map, 0, sizeof(map));
+        memset(c, 0, sizeof(c));
+        cnt = 0;
+        cin >> M >> N >> cabbage;
+
+        for (size_t j = 0; j < cabbage; ++j) {
+            cin >> x >> y;
+            map[x][y] = 1;  
+
+        }
+
+        for (size_t j = 0; j < M; ++j) {
+            for (size_t k = 0; k < N; ++k) {
+                if (c[j][k] == 0 && map[j][k] == 1) {
+
+                    ++cnt;
+                    bfs(j, k);
+                    
+                    
+                }
+                    
+            }
+        }
+
+        cout << cnt << endl;
+    
+    }
+    
+
+
+    return 0;
+}
+*/
+
