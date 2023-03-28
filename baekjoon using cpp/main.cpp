@@ -1689,3 +1689,151 @@ int main() {
 }
 */
 
+
+#include <iostream>
+#include <algorithm>
+#include <queue>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
+using namespace std;
+//boj16234
+int N;
+int L, R;
+
+int map[50][50] = { 0, };
+int c[50][50] = { 0, };
+int open[50][50] = { 0, };
+int dir[4][2] = {
+    {1,0},
+    {-1,0},
+    {0,1},
+    {0,-1}
+};
+
+
+
+
+bool isInside(int x, int y) {
+    
+    return (x >= 0 && x < N) && (y >= 0 && y < N);
+}
+
+bool isOpen(int x, int y) {
+    int next_row, next_col;
+    int diff;
+    for (size_t i = 0; i < 4; ++i) {
+        next_row = x + dir[i][0];
+        next_col = y + dir[i][1];
+        diff = abs(map[next_row][next_col] - map[x][y]);
+        if (isInside(next_row, next_col) && diff >= L && diff <= R)
+        {
+            return true;
+        }
+        
+    }
+    return false;
+}
+void bfs(int x, int y) {
+    int cur_row = x;
+    int cur_col = y;
+
+    int sum = 0;
+    int cnt = 0;
+
+    queue<pair<int, int>> q;
+    queue<pair<int, int>> q2;
+    q.push(pair<int,int>(cur_row, cur_col));
+    q2.push(pair<int, int>(cur_row, cur_col));
+    c[cur_row][cur_col] = 1;
+    while (!q.empty()) {
+
+        cur_row = q.front().first;
+        cur_col = q.front().second;
+
+        q.pop();
+
+        sum += map[cur_row][cur_col];
+        ++cnt;
+
+        for (size_t i = 0; i < 4; ++i) {
+
+            int next_row = cur_row + dir[i][0];
+            int next_col = cur_col + dir[i][1];
+
+            if (isInside(next_row, next_col) && c[next_row][next_col] == 0) {
+                int diff = abs(map[cur_row][cur_col] - map[next_row][next_col]);
+                if (diff >= L && diff <= R) {
+                    c[next_row][next_col] = 1;
+                    q.push(pair<int, int>(next_row, next_col));
+                    q2.push(pair<int, int>(next_row, next_col));
+
+
+                }
+            }
+        }
+    }
+
+        int value = sum / cnt;
+        while (!q2.empty()) {
+            
+            int row = q2.front().first;
+            int col = q2.front().second;
+            q2.pop();
+            map[row][col] = value;
+        
+            
+        }
+
+
+
+    
+    
+
+
+
+
+}
+int main() {
+
+    int day = 0;
+    bool check = true;
+
+    cin >> N >> L >> R;
+
+    for (size_t i = 0; i < N; ++i) {
+
+        for (size_t j = 0; j < N; ++j) {
+        
+            cin >> map[i][j];
+        
+        }
+
+    }
+
+    
+    while (check) {
+        check = false;
+        for (size_t i = 0; i < N; ++i) {
+            for (size_t j = 0; j < N; ++j) {
+
+                if (c[i][j] == 0 && isOpen(i, j)) {
+                    bfs(i,j);
+                    check = true;
+                }
+
+            }
+        }
+        if (check == true) {
+            ++day;
+        }
+        
+        memset(c, false, sizeof(c));
+
+    }
+    cout << day;
+
+
+    return 0;
+
+}
