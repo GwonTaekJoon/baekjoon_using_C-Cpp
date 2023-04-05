@@ -1689,7 +1689,7 @@ int main() {
 }
 */
 
-
+/*
 #include <iostream>
 #include <algorithm>
 #include <queue>
@@ -1836,4 +1836,158 @@ int main() {
 
     return 0;
 
+}
+*/
+
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <queue>
+#include <cstring>
+//BOJ 10026
+using namespace std;
+
+int cnt = 0;
+int n;
+char map[100][100] = { 0, };
+int c[100][100] = { 0, };
+
+int dir[4][2] = {
+    {0,1},
+    {0,-1},
+    {1,0},
+    {-1,0}
+
+
+};
+
+
+bool isInside(int x, int y) {
+    return ((x >= 0 && x < n) && (y >= 0 && y < n));
+
+}
+void bfs(int i, int j) {
+
+
+
+    int cur_row = i;
+    int cur_col = j;
+    queue<pair<int, int>> q;
+    q.push(pair<int, int>(cur_row, cur_col));
+    c[cur_row][cur_col] = 1;
+
+
+
+    while (!q.empty()) {
+        cur_row = q.front().first;
+        cur_col = q.front().second;
+        q.pop();
+
+
+
+
+        for (size_t i = 0; i < 4; ++i) {
+            int next_row = cur_row + dir[i][0];
+            int next_col = cur_col + dir[i][1];
+            if (isInside(next_row, next_col) && c[next_row][next_col] == 0)
+            {
+                if (map[cur_row][cur_col] == map[next_row][next_col]) {
+
+                    q.push(pair<int, int>(next_row, next_col));
+                    c[next_row][next_col] = 1;
+
+                }
+
+
+            }
+
+        }
+
+
+
+
+
+    }
+
+
+}
+
+int main() {
+
+
+
+    cin >> n;
+
+    for (size_t i = 0; i < n; ++i) {
+        for (size_t j = 0; j < n; ++j) {
+
+            cin >> map[i][j];
+
+        }
+
+    }
+
+
+
+    for (size_t i = 0; i < n; ++i) {
+        for (size_t j = 0; j < n; ++j) {
+            if (c[i][j] == 0) {
+
+                bfs(i, j);
+                ++cnt;
+
+            }
+
+        }
+    }
+
+    cout << cnt << " ";
+
+    cnt = 0;
+    memset(c, 0, sizeof(c));
+
+
+
+
+    for (size_t i = 0; i < n; ++i) {
+
+        for (size_t j = 0; j < n; ++j) {
+
+            if (map[i][j] == 'G' || map[i][j] == 'R') {
+                map[i][j] = '1';
+            }
+
+            else {
+                map[i][j] = '0';
+            }
+
+        }
+    }
+
+
+    for (size_t i = 0; i < n; ++i) {
+
+        for (size_t j = 0; j < n; ++j) {
+
+            if (c[i][j] == 0) {
+                bfs(i, j);
+                ++cnt;
+
+            }
+
+
+        }
+
+    }
+
+
+    cout << cnt;
+
+
+
+
+
+    return 0;
 }
