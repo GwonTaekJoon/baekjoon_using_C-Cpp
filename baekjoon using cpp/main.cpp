@@ -1841,7 +1841,7 @@ int main() {
 
 
 
-
+/*
 #include <iostream>
 #include <algorithm>
 #include <queue>
@@ -1990,4 +1990,116 @@ int main() {
 
 
     return 0;
+}*/
+
+/*
+#include <iostream>
+#include <queue>
+#include <algorithm>
+#include <vector>
+//BOJ 18405
+using namespace std;
+
+
+
+int n;
+int k;
+int row, col;
+int map[200][200] = { 0, };
+int s, x_t, y_t;
+priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> q;
+
+
+int dir[4][2] = {
+    {-1,0},
+    {1,0},
+    {0,1},
+    {0,-1}
+
+};
+
+bool isInside(int x, int y) {
+
+
+    return (x >= 0 && x < n) && (y >= 0 && y < n);
 }
+
+
+void bfs() {
+
+    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> temp;
+    //바로 위에 있는 temp큐를 전역변수로 선언하면 bfs함수 호출마다 초기화가 안되어서 점점 커져 시간초과가 뜸
+
+    while (!q.empty()) {
+
+        int number = q.top().first;
+        int cur_row = q.top().second.first;
+        int cur_col = q.top().second.second;
+
+        q.pop();
+
+
+        for (size_t i = 0; i < 4; ++i) {
+
+            int next_row = cur_row + dir[i][0];
+            int next_col = cur_col + dir[i][1];
+
+
+            if (isInside(next_row, next_col) && map[next_row][next_col] == 0) {
+
+                map[next_row][next_col] = number;
+                temp.push(make_pair(number, make_pair(next_row, next_col)));
+
+
+            }
+        }
+
+    }
+    q = temp;
+
+}
+
+
+
+
+
+int main() {
+
+
+    cin >> n >> k;
+
+    for (size_t i = 0; i < n; ++i) {
+
+        for (size_t j = 0; j < n; ++j) {
+
+            cin >> map[i][j];
+            if (map[i][j] != 0) {
+
+                q.push(make_pair(map[i][j], make_pair(i, j)));
+
+
+
+            }
+
+
+        }
+    }
+
+    cin >> s >> x_t >> y_t;
+
+    for (size_t i = 0; i < s; ++i) {
+        bfs();
+    }
+
+
+
+
+
+    cout << map[x_t - 1][y_t - 1];
+
+    return 0;
+
+}
+*/
+
+
