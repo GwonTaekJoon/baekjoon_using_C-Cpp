@@ -2102,7 +2102,7 @@ int main() {
 }
 */
 
-
+/*
 
 #include <iostream>
 #include <algorithm>
@@ -2155,4 +2155,56 @@ int main() {
     cout << sum % 1000000000;
 
     return 0;
+}*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+//boj 11057
+using namespace std;
+
+long long dp[1000][10] = { 0, };
+
+int main() {
+
+    int n;
+    long long sum = 0;
+    cin >> n;
+
+    for (size_t i = 0; i < 10; ++i) {
+        
+        dp[1][i] = 1;
+    
+    }
+    
+
+    for (size_t i = 0; i <= n; ++i) {
+        
+        dp[i][0] = 1;
+    
+    }
+
+    for (size_t i = 2; i <= n; ++i) {
+        
+        for (size_t j = 1; j < 10; ++j) {
+            
+
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1] % 10007;
+
+        }
+        
+
+    }
+
+    for(size_t i = 0; i<=9; ++i) {
+        
+        sum += dp[n][i] % 10007;
+        
+    }
+    cout << sum % 10007;
+
+    return 0;
+
 }
+*/
