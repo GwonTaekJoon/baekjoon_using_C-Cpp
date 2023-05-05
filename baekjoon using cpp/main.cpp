@@ -2208,3 +2208,103 @@ int main() {
 
 }
 */
+
+/*
+#include <iostream>
+#include <algorithm>
+
+//boj 11053
+using namespace std;
+int dp[1000] = { 0, };
+int arr[1000] = { 0, };
+int main() {
+
+
+    int n;
+    int result = 0;
+
+    cin >> n;
+
+    for (size_t i = 0; i < n; ++i) {
+    
+        cin >> arr[i];
+
+    }
+
+    for (size_t i = 0; i < n; ++i) {
+    
+        dp[i] = 1;
+    
+    }
+
+    for (size_t i = 0; i < n; ++i) {
+        
+
+        for (size_t j = 0; j < i; ++j) {
+            if (arr[i] > arr[j]) {
+                
+                dp[i] = max(dp[i], dp[j] + 1);
+            
+            }
+        }
+    }
+
+
+    for (size_t i = 0; i < n; ++i) {
+    
+        result = max(dp[i], result);
+
+    }
+
+
+    cout << result;
+    return 0;
+}*/
+
+
+#include <iostream>
+#include <algorithm>
+
+
+using namespace std;
+int dp[1000] = { 0, };
+int arr[1000] = { 0, };
+
+int main() {
+
+    int n;
+    int result = 0;
+    cin >> n;
+
+
+    for (size_t i = 0; i < n; ++i) {
+    
+        cin >> arr[i];
+    
+    }
+    
+    for (size_t i = 0; i < n; ++i) {
+        
+        dp[i] = arr[i];
+        
+        for (size_t j = 0; j < i; ++j) {
+            
+            if(arr[i] > arr[j]) {
+                dp[i] = max(dp[i], dp[j] + arr[i]);
+            }
+
+        }
+    
+    }
+
+
+    for (size_t i = 0; i < n; ++i) {
+        
+        result = max(result, dp[i]);
+    
+    }
+        
+    cout << result;
+
+    return 0;
+}
