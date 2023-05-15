@@ -2363,4 +2363,191 @@ int main() {
 }
 */
 
+/*2293
+#include <iostream>
+#include <algorithm>
 
+using namespace std;
+
+int arr[101] = { 0, };
+int dp[10001] = { 0, };
+
+
+
+int main() {
+
+    int repeat, num;
+
+    cin >> repeat >> num;
+
+    for (size_t i = 1; i <= repeat; ++i) {
+    
+        cin >> arr[i];
+
+    }
+
+
+    dp[0] = 1;
+
+
+
+    for (size_t i = 1; i <= repeat; ++i) {
+    
+        for (size_t j = arr[i]; j <= num; ++j) {
+
+            dp[j] += dp[j - arr[i]];
+
+        }
+    }
+
+
+    
+    cout << dp[num];
+
+    return 0;
+
+}
+
+*/
+
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <queue>
+
+using namespace std;
+
+
+int for_exit = 0;
+int result = 0;
+int day = 0; 
+int check = 0;
+int space_empty = 0;
+queue<pair<int, pair<int, int>>> q;
+int arr[101][101][101] = { 0, };
+int c[101][101][101] = { 0, };
+int dir[6][3] = {
+    {1,0,0},
+    {-1,0,0},
+    {0,1,0},
+    {0,-1,0},
+    {0,0,1},
+    {0,0,-1}
+};
+
+bool isInside(int x, int y, int z) {
+
+    return (x >= 1 && x < 101) && (y >= 1 && y < 101) && (z >= 1 && z < 101);
+}
+
+void bfs() 
+{
+    while (!q.empty()) {
+        int cur_z = q.front().first;
+        int cur_x = q.front().second.first;
+        int cur_y = q.front().second.second;
+        q.pop();
+        
+        for (size_t i = 0; i < 6; ++i) {
+        
+            int next_z = cur_z + dir[i][0];
+            int next_x = cur_x + dir[i][1];
+            int next_y = cur_y + dir[i][2];
+            if(isInside(next_z, next_x, next_y) == 1 && arr[next_z][next_x][next_y] == 0 && c[next_z][next_x][next_y] == -1) {
+                    
+                c[next_z][next_x][next_y] = c[cur_z][cur_x][cur_y] + 1;
+                q.push(make_pair(next_z, make_pair(next_x, next_y)));
+
+
+
+            }
+        
+        
+        }
+    
+    
+    
+    
+    }
+    
+
+
+}
+
+int main() {
+
+    int m, n, h;
+
+    cin >> m >> n >> h;
+
+    for (size_t i = 1; i <= h; ++i) {
+ 
+        for (size_t j = 1; j <=n; ++j) {
+
+            for (size_t k = 1; k <= m; ++k) {
+   
+                cin >> arr[i][j][k];
+                if (arr[i][j][k] == 1) {
+                    q.push(make_pair(i, make_pair(j, k)));
+                    c[i][j][k] = 0;
+                }
+                else if (arr[i][j][k] == 0) {
+                    
+                    ++check;
+                    c[i][j][k] = -1;
+                    
+                }
+
+                else if (arr[i][j][k] == -1) {
+                    
+                    ++space_empty;
+                    c[i][j][k] = -1;
+                
+                }
+
+            }
+ 
+        }
+    }
+
+
+    if (check == 0) {
+        
+        cout << 0;
+        return 0;
+    
+    }
+
+    bfs();
+
+
+    for (size_t i = 1; i <= h; ++i) {
+
+        for (size_t j = 1; j <= n; ++j) {
+
+            for (size_t k = 1; k <= m; ++k) {
+
+                int result = max(result, c[i][j][k]);
+                if (arr[i][j][k] == 0)
+                {
+                    result = -1;
+                    for_exit = 1;
+                    break;
+                }
+
+            }
+
+            if (for_exit == 1)
+                break;
+        }
+        if (for_exit == 1)
+            break;
+    }
+
+    cout << result;
+
+    return 0;
+
+}
