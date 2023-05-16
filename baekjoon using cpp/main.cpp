@@ -2416,7 +2416,7 @@ int main() {
 #include <iostream>
 #include <algorithm>
 #include <queue>
-
+//boj 7569
 using namespace std;
 
 
@@ -2459,6 +2459,8 @@ void bfs()
                     
                 c[next_z][next_x][next_y] = c[cur_z][cur_x][cur_y] + 1;
                 q.push(make_pair(next_z, make_pair(next_x, next_y)));
+                arr[next_z][next_x][next_y] = 1;
+                
 
 
 
@@ -2529,7 +2531,7 @@ int main() {
 
             for (size_t k = 1; k <= m; ++k) {
 
-                int result = max(result, c[i][j][k]);
+                result = max(result, c[i][j][k]);
                 if (arr[i][j][k] == 0)
                 {
                     result = -1;
