@@ -2412,7 +2412,7 @@ int main() {
 
 
 
-
+/*
 #include <iostream>
 #include <algorithm>
 #include <queue>
@@ -2553,3 +2553,61 @@ int main() {
     return 0;
 
 }
+*/
+
+
+
+/*
+#include <iostream>
+#include <algorithm>
+
+//boj 2294
+using namespace std;
+
+int arr[101] = { 0, };
+int dp[100001] = { 0, };
+int coin[100001] = { 0, };
+int main() {
+
+    int n, sum;
+    size_t input = 0;
+    cin >> n >> sum;
+
+    for (size_t i = 0; i < n; ++i) {
+        
+        cin >> arr[i];
+        
+    
+    }
+
+
+    for (size_t i = 1; i < 100001; ++i) {
+        dp[i] = 100001;
+        //dp[0] = 1; 
+    }
+
+ 
+    for (int i = 0; i < n; ++i) {
+        
+        for (int j = arr[i]; j <= sum; ++j) {
+            
+            dp[j] = min(dp[j], 1 + dp[j - arr[i]]);
+        }
+    
+    
+    }
+
+
+    if (dp[sum] == 100001) {
+        
+        cout << "-1";
+        return 0;
+    
+    }
+    cout << dp[sum];
+
+
+
+
+    return 0;
+}*/
