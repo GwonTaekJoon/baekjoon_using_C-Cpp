@@ -2607,7 +2607,67 @@ int main() {
     cout << dp[sum];
 
 
-
+    
 
     return 0;
 }*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <string>
+
+//boj 16719
+
+using namespace std;
+int c[100] = { 0, };
+string input;
+
+
+void solve(string str, int l, int r) {
+
+    int new_l = l;
+
+    for (int i = l; i < r; ++i) {
+        
+        if (str.at(new_l) > str.at(i)) {
+            new_l = i;
+
+        }
+    }
+    c[new_l] = 1;
+    for (int i = 0; i < str.length(); ++i) {
+        
+        if (c[i] == 1) {
+            
+            cout << str.at(i);
+        }
+    
+    }
+    cout << endl;
+
+
+    if (new_l + 1 < r) {
+        
+        solve(str, new_l + 1, r);
+    }
+    if (new_l - 1 >= l) {
+    
+        solve(str, l, new_l);
+
+    }
+
+}
+int main() {
+
+    cin >> input;
+
+    
+    solve(input, 0, input.length());
+
+    return 0;
+}
+
+
+*/
