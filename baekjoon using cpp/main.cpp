@@ -2671,8 +2671,15 @@ int main() {
 
 
 */
+
+
+
+
+/*
 #include <iostream>
 #include <algorithm>
+
+//boj 2096
 
 using namespace std;
 
@@ -2731,3 +2738,5 @@ int  main() {
     return 0;
 
 }
+*/
+
