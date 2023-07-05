@@ -2740,3 +2740,135 @@ int  main() {
 }
 */
 
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+
+using namespace std;
+
+
+string input[30];
+int main() {
+
+    int repeat;
+    size_t str_len;
+
+    int end;
+    int start;
+    int tmp = 0;
+
+    cin >> repeat;
+
+    for (int i = 0; i < repeat; ++i) {
+        
+        cin >> input[i];
+    
+    }
+        
+    for (int i = 0; i < repeat; ++i) {
+        
+         end = str_len = input[i].length() - 1;
+         start = 0;
+         tmp = 0;
+
+        for (int j = 0; j <= str_len / 2; ++j) {
+            
+            if (input[i].at(start) == input[i].at(end)) {
+                ++start;
+                --end;
+            }
+                
+
+            else if (input[i].at(start) != input[i].at(end)) {
+                
+                if (input[i].at(start) == input[i].at(end - 1)) {
+                    --end;
+                    ++tmp;
+
+                }
+                else if (input[i].at(start + 1) == input[i].at(end)) {
+                    
+                    ++start;
+                    ++tmp;
+
+                }
+
+                else { 
+                    tmp = 2;
+                    break;
+                }
+            
+            }
+        
+        
+        
+        
+        }
+
+        if (tmp >= 2) {
+            end = str_len = input[i].length() - 1;
+            start = 0;
+            tmp = 0;
+
+            for (int j = 0; j <= str_len / 2; ++j) {
+
+                if (input[i].at(start) == input[i].at(end)) {
+                    ++start;
+                    --end;
+                }
+
+
+                else if (input[i].at(start) != input[i].at(end)) {
+
+                    if (input[i].at(start + 1) == input[i].at(end)) {
+                        ++start;
+                        ++tmp;
+
+                    }
+                    else if (input[i].at(start) == input[i].at(end) - 1) {
+                        --end;
+                        ++tmp;
+                        
+
+                    }
+
+                    else {
+                        tmp = 2;
+                        break;
+                    }
+
+                }
+
+
+
+
+            }
+
+           
+
+
+        }
+
+        
+
+
+        if (tmp >= 2) {
+            
+            cout << 2;
+        
+        }
+        else {
+            
+            cout << tmp;
+        
+        }
+
+    
+    
+    }
+
+
+
+    return 0;
+}
