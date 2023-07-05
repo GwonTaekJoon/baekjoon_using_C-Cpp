@@ -2671,3 +2671,63 @@ int main() {
 
 
 */
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int input[3];
+int max_dp[3];
+int min_dp[3];
+
+int  main() {
+
+    int repeat;
+    cin >> repeat;
+
+    cin >> input[0] >> input[1] >> input[2];
+    for (int i = 0; i < 3; ++i) {
+        max_dp[i] = min_dp[i] = input[i];
+    }
+
+
+    for (int i = 1; i < repeat; ++i) {
+        
+        cin >> input[0] >> input[1] >> input[2];
+        
+        
+        int max_tmp_0 = max_dp[0];
+        int min_tmp_0 = min_dp[0];
+
+        int max_tmp_1 = max_dp[1];
+        int min_tmp_1 = min_dp[1];
+
+        int max_tmp_2 = max_dp[2];
+        int min_tmp_2 = min_dp[2];
+
+        
+
+
+        max_dp[0] = input[0] + max(max_tmp_0, max_tmp_1);
+        max_dp[1] = input[1] + max(max_tmp_0,max(max_tmp_1, max_tmp_2));
+        max_dp[2] = input[2] + max(max_tmp_2, max_tmp_1);
+        
+        min_dp[0] = input[0] + min(min_tmp_0, min_tmp_1);
+        min_dp[1] = input[1] + min(min_tmp_0, min(min_tmp_1, min_tmp_2));
+        min_dp[2] = input[2] + min(min_tmp_2, min_tmp_1);
+
+
+    }
+        
+    cout << max(max(max_dp[0], max_dp[1]), max_dp[2]) << " " << min(min(min_dp[0], min_dp[1]), min_dp[2]);
+
+
+
+
+
+
+
+
+    return 0;
+
+}
