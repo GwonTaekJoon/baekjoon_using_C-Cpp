@@ -2740,11 +2740,13 @@ int  main() {
 }
 */
 
+
+/*
 #include <iostream>
 #include <string>
 #include <algorithm>
 
-
+//boj 17609
 using namespace std;
 
 
@@ -2856,11 +2858,13 @@ int main() {
         if (tmp >= 2) {
             
             cout << 2;
+            cout << endl;
         
         }
         else {
             
             cout << tmp;
+            cout << endl;
         
         }
 
@@ -2872,3 +2876,5 @@ int main() {
 
     return 0;
 }
+
+*/
