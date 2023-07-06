@@ -2878,3 +2878,73 @@ int main() {
 }
 
 */
+
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+
+using namespace std;
+
+//boj 2118
+int cost[50000] = { 0, };
+
+int main() {
+
+
+    int repeat;
+    int sum = 0;
+    int answer = 0;
+
+    int tmp_1 = 0;
+    int tmp_2 = 0;
+
+    cin >> repeat; 
+
+    for (int i = 0; i < repeat; ++i) {
+        
+        cin >> cost[i];
+        sum += cost[i];
+    
+
+    }
+
+    tmp_1 = cost[0];
+    tmp_2 = sum - cost[0];
+
+    
+
+    int a = 0; 
+    int b = 1;
+
+    while (a < repeat) {
+    
+        answer = max(answer, min(tmp_1, tmp_2));
+        if (tmp_1 >= tmp_2) {
+            
+            tmp_1 -= cost[a];
+            tmp_2 += cost[a]; 
+            ++a;
+            continue;
+        
+        }
+
+        tmp_1 += cost[b];
+        tmp_2 -= cost[b];
+        ++b;
+        b %= repeat;
+
+    
+    
+    
+    }
+
+    cout << answer;
+
+    return 0;                              
+}
+
+*/
+
