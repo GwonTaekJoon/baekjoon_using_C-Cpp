@@ -2948,3 +2948,113 @@ int main() {
 
 */
 
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <queue>
+#include <cstring>
+
+//boj 2589
+using namespace std;
+
+char map[50][50] = { 0, };
+int c[50][50] = { 0, };
+int result[50][50] = { 0, };
+int row, col;
+int max_tmp = 0;
+int tmp = 0;
+
+int dir[4][2] = {
+    {-1,0},
+    {0,1},
+    {0,-1},
+    {1, 0}
+};
+
+bool isInside(int i, int j) {
+
+    
+    return (i < row && i >= 0) && (j < col && j >= 0);
+
+}
+
+
+int bfs(int i, int j) {
+    
+    queue<pair<int,int>> q;
+    q.push({i,j});
+
+    result[i][j] = 1;
+    c[i][j] = 1;
+
+    while (!q.empty()) {
+        
+        int cur_row = q.front().first;
+        int cur_col = q.front().second;
+        q.pop();
+
+        for(int i = 0; i < 4; ++i) {
+            
+            int next_row = cur_row + dir[i][0];
+            int next_col = cur_col + dir[i][1];
+
+            if (isInside(next_row, next_col) && c[next_row][next_col] == 0 && map[next_row][next_col] == 'L') {
+                
+                c[next_row][next_col] = 1;
+                result[next_row][next_col] = result[cur_row][cur_col] + 1;
+                q.push({ next_row, next_col });
+                if (max_tmp < result[next_row][next_col]) {
+                    
+                    max_tmp = result[next_row][next_col];
+                }
+               
+            
+            }
+        
+        }
+        
+        
+    
+    }
+
+    return max_tmp - 1;
+
+}
+int main() {
+
+    int answer = 0;
+
+    cin >> row >> col;
+
+    for (int i = 0; i < row; ++i) {
+        
+        for (int j = 0; j < col; ++j) {
+        
+            cin >> map[i][j];
+        
+        
+        }
+    
+    }
+    
+    for (int i = 0; i < row; ++i) {
+
+        for (int j = 0; j < col; ++j) {
+            if (map[i][j] == 'L') {
+                tmp = bfs(i, j);
+                answer = max(answer, tmp);
+                memset(c, 0, sizeof(c[0][0]) * 50 * 50);
+            }
+
+        }
+
+    }
+
+    cout << answer;
+
+    return 0;
+}*/
+
+
