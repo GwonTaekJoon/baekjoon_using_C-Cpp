@@ -3105,3 +3105,64 @@ int main() {
 }
 
 */
+
+
+
+/*
+#include <iostream>
+#include <algorithm>
+
+//boj 2212
+using namespace std;
+
+int sensor[10000] = { 0, };
+int diff[10000] = { 0, };
+
+int main() {
+
+    
+    int repeat;
+    int tollcenter;
+    int answer = 0;
+
+    cin >> repeat;
+
+    cin >> tollcenter;
+
+
+    for (int i = 0; i < repeat; ++i) {
+       
+        cin >> sensor[i];
+    
+    }
+
+
+    sort(sensor, sensor + repeat);
+
+
+    for (int i = 0; i < repeat - 1; ++i) {
+    
+        diff[i] = sensor[i + 1] - sensor[i];
+
+    
+    }
+
+    sort(diff, diff + repeat - 1, greater<int>());
+
+        
+    for (int i = 0; i < repeat - 1; ++i) {
+    
+        if (i < tollcenter - 1 )
+            continue;
+        answer += diff[i];
+
+    
+    
+    }
+
+    cout << answer;
+
+    return 0;
+}
+*/
+
