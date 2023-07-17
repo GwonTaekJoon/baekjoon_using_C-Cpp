@@ -3166,3 +3166,59 @@ int main() {
 }
 */
 
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+//boj 12904
+
+int main() {
+
+    string str1;
+    string str2;
+
+    cin >> str1;
+    cin >> str2;
+
+    while (str1.length() != str2.length()) {
+        
+        if (str2.back() == 'A') {
+            
+            str2.pop_back();
+
+        
+        }
+        
+        else if (str2.back() == 'B') {
+            
+            str2.pop_back();
+            reverse(str2.begin(), str2.end());
+        
+        }
+    
+    
+    
+    }
+
+    if (str1.compare(str2) == 0) {
+    
+        cout << 1;
+        return 0;
+
+    }
+
+    cout << 0;
+
+
+
+
+
+
+    return 0;
+
+}
+*/
+
