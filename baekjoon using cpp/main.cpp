@@ -3222,3 +3222,49 @@ int main() {
 }
 */
 
+
+
+/*
+#include <iostream>
+#include <algorithm>
+
+//boj 11509
+
+using namespace std;
+
+int balloons[1000001] = {0,};
+
+
+int main() {
+
+    int repeat; 
+    int input;
+    int answer = 0;
+
+    cin >> repeat;
+
+    for (int i = 0; i < repeat; ++i) {
+        
+        cin >> input;
+        if (balloons[input + 1] == 0)
+        {
+            //현재 맞출 풍선의 높이보다 1만큼 더 높은 풍선의 화살이 없다면 == 간접적으로 풍선을 터트릴 수 없다면
+            //화살 하나 새로 사용해서 터트리고 해당 높이의 화살이 있음을 체크 
+            ++balloons[input];
+            ++answer;
+            continue;
+        }
+
+        //현재 터뜨릴 풍선의 높이보다 1만큼 더 높은 풍선의 화살이 있다면
+        //기존의 화살을 소비하여 현재 풍선을 터트림
+        ++balloons[input];
+        --balloons[input + 1];
+    
+    }
+
+    cout << answer;
+
+    return 0;
+}*/
+
+
