@@ -3222,3 +3222,122 @@ int main() {
 }
 */
 
+/*
+#include <iostream>
+#include <algorithm>
+
+//boj 17216
+using namespace std;
+int arr[1000] = { 0, };
+int dp[1000] = { 0, };
+int main() {
+
+    int input;
+    int result = 0;
+
+    cin >> input;
+
+    for (size_t i = 0; i < input; ++i) {
+    
+        cin >> arr[i];
+    
+    
+    }
+
+    for (size_t i = 0; i < input; ++i) {
+        
+        dp[i] = arr[i];
+        for (size_t j = 0; j < i; ++j) {
+        
+            
+            if (arr[i] < arr[j]) {
+
+                dp[i] = max(dp[i], dp[j] + arr[i]);
+                    
+            }
+        
+        }
+    
+    }
+
+    for (size_t i = 0; i < input; ++i) {
+    
+        result = max(result, dp[i]);
+    
+    }
+
+    cout << result;
+
+
+
+
+
+    return 0;
+
+}*/
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+//boj 2565
+using namespace std;
+
+vector<pair<int, int>> v;
+int dp[100] = { 0, };
+
+int main() {
+
+    int num;
+    int input1, input2;
+    int result = 0;
+
+
+    cin >> num;
+
+    for (size_t i = 0; i < num; ++i) {
+
+        cin >> input1 >> input2;
+        v.push_back({ input1, input2 });
+    
+    }
+
+    sort(v.begin(), v.end());
+
+    for (size_t i = 0; i < num; ++i) {
+    
+        for (size_t j = 0; j < i; ++j) {
+        
+            if (v.at(i).second > v.at(j).second) {
+                
+                dp[i] = max(dp[i], dp[j] + 1);
+            
+            }
+
+        
+        }
+        
+    
+    
+    }
+
+
+
+    for (size_t i = 0; i < num; ++i) {
+        
+        result = max(result, dp[i]);
+    
+    }
+
+    cout << num - result - 1;
+
+
+
+
+    return 0;
+
+}
+
+
