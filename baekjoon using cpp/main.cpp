@@ -3321,7 +3321,7 @@ int main() {
 }*/
 
 
-
+/*
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -3383,5 +3383,121 @@ int main() {
     return 0;
 
 }
+*/
 
+/*
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int dp[1000] = { 0, };
+int main() {
+
+    string str1;
+    string str2;
+    int result = 0;
+
+    cin >> str1;
+    cin >> str2;
+    
+    size_t len;
+
+    len = min(str1.length(),str2.length());
+
+
+    for (size_t i = 0; i < len; ++i) {
+        
+        for (size_t j = 0; j < i; ++j) {
+        
+            
+            if (str1.at(i) == str2.at(j)) {
+                
+                dp[i] = max(dp[i], dp[j] + 1);
+            
+            }
+        
+        
+        }
+    
+    }
+
+    for (size_t i = 0; i < len; ++i) {
+        
+        result = max(result, dp[i]);
+        
+
+    }
+
+    cout << result + 1;
+
+
+    return 0;
+
+}*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <climits>
+
+//boj 2230
+//문제 풀이 주의
+//포인터 방향을 왼쪽 끝과 오른쪽 끝으로 설정할 경우
+//두 수의 차가 문제에서 원하는 차이값 이상일 시
+//왼쪽 포인터가 오른쪽으로, 오른쪽 포인터가 왼쪽으로 가는 경우에 따라
+//결과가 달라지기 때문에 포인터 방향을 왼쪽에서 오른쪽으로 통일해야 풀림
+
+
+using namespace std;
+
+int arr[100000] = { 0, };
+int arr2[50000] = { 0, };
+int main() {
+
+    int num, diff;
+    int result = INT_MAX;
+    int tmp = 0;
+    cin >> num >> diff;
+    int first_cur = 0;
+    int sec_cur = 0;
+
+    for (size_t i = 0; i < num; ++i) {
+
+        cin >> arr[i];
+
+    }
+    
+    sort(arr, arr + num);
+
+
+    while (sec_cur < num) {
+
+        tmp = arr[sec_cur] - arr[first_cur];
+        if (tmp == diff) {
+            cout << tmp;
+            return 0;
+
+        }
+
+        if (tmp < diff)
+            ++sec_cur;
+        else {
+            ++first_cur;
+            result = min(tmp, result);
+        }
+        
+
+
+        
+
+    }
+
+    cout << result;
+
+
+    return 0;
+}*/
 
