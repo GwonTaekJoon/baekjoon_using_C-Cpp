@@ -3385,57 +3385,6 @@ int main() {
 }
 */
 
-/*
-#include <iostream>
-#include <string>
-#include <algorithm>
-
-using namespace std;
-
-int dp[1000] = { 0, };
-int main() {
-
-    string str1;
-    string str2;
-    int result = 0;
-
-    cin >> str1;
-    cin >> str2;
-    
-    size_t len;
-
-    len = min(str1.length(),str2.length());
-
-
-    for (size_t i = 0; i < len; ++i) {
-        
-        for (size_t j = 0; j < i; ++j) {
-        
-            
-            if (str1.at(i) == str2.at(j)) {
-                
-                dp[i] = max(dp[i], dp[j] + 1);
-            
-            }
-        
-        
-        }
-    
-    }
-
-    for (size_t i = 0; i < len; ++i) {
-        
-        result = max(result, dp[i]);
-        
-
-    }
-
-    cout << result + 1;
-
-
-    return 0;
-
-}*/
 
 
 /*
