@@ -3450,3 +3450,179 @@ int main() {
     return 0;
 }*/
 
+
+
+#include <iostream>
+#include <algorithm>
+#include <queue>
+#include <cstring>
+
+using namespace std;
+
+int n, m;
+int times = 0;
+int cnt = 0;
+int map[300][300] = { 0, };
+int tmp[300][300] = { 0, };
+int c[300][300] = { 0, };
+int dir[4][2] = {
+    {0, 1},
+    {0, -1},
+    {1, 0},
+    {-1, 0}
+};
+
+bool isInside(int x, int y) {
+
+    return (x >= 0 && x < n) && (y >= 0 && y < m);
+
+}
+void bfs(int x, int y) {
+    queue<pair<int, int>> q;
+    q.push({ x, y });
+
+    while (!q.empty()) {
+
+        int cur_row = q.front().first;
+        int cur_col = q.front().second;
+        q.pop();
+
+        for (size_t i = 0; i < 4; ++i) {
+
+            int next_row = cur_row + dir[i][0];
+            int next_col = cur_col + dir[i][1];
+
+            if (isInside(next_row, next_col) && map[next_row][next_col] != 0 && !c[next_row][next_col]) {
+                q.push({ next_row, next_col });
+                c[next_row][next_col] = 1;
+
+            }
+
+        }
+
+
+    }
+
+
+}
+
+
+void melt_iceberg() {
+    memset(tmp, 0, sizeof(tmp));
+
+    for (size_t current_row = 0; current_row < n; ++current_row) {
+
+        for (size_t current_col = 0; current_col < m; ++current_col) {
+            int water = 0;
+            if (map[current_row][current_col] != 0) {
+
+                for (size_t i = 0; i < 4; ++i) {
+
+                    int next_row = current_row + dir[i][0];
+                    int next_col = current_col + dir[i][1];
+                    if (isInside(next_row, next_col) == 1 && map[next_row][next_col] == 0) {
+
+                        ++water;
+                    }
+
+                }
+
+
+            }
+
+            int value = map[current_row][current_col] - water;
+            if (value > 0) tmp[current_row][current_col] = value;
+            if (value < 0) tmp[current_row][current_col] = 0;
+        }
+    }
+
+    for (size_t i = 0; i < n; ++i) {
+
+        for (size_t j = 0; j < m; ++j) {
+
+            map[i][j] = tmp[i][j];
+
+        }
+    }
+
+
+}
+
+
+int main() {
+
+
+
+    cin >> n >> m;
+
+
+    for (size_t i = 0; i < n; ++i) {
+
+
+        for (size_t j = 0; j < m; ++j) {
+
+
+            cin >> map[i][j];
+
+        }
+
+
+    }
+
+
+    while (1) {
+
+        cnt = 0;
+        for (size_t i = 0; i < n; ++i) {
+
+            for (size_t j = 0; j < m; ++j) {
+                if (!c[i][j] && map[i][j] != 0) {
+
+                    bfs(i, j);
+                    ++cnt;
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+
+        if (cnt == 0) {
+            cout << 0;
+            return 0;
+        }
+
+
+
+        else if (cnt >= 2) {
+
+            cout << times;
+            return 0;
+
+        }
+
+
+        ++times;
+        melt_iceberg();
+
+        memset(c, 0, sizeof(c));
+
+
+
+
+    }
+
+
+
+
+
+
+    return 0;
+
+
+}
