@@ -3629,4 +3629,66 @@ int main() {
 }*/
 
 
+/*
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+
+//boj 9084
+using namespace std;
+
+int coin[21] = { 0, };
+int dp[10001] = { 0, };
+
+
+int main() {
+
+    int testcase, n, goal;
+
+    cin >> testcase;
+
+    for (size_t i = 0; i < testcase; ++i) {
+        
+        cin >> n;
+
+        for (size_t j = 1; j <= n; ++j) {
+            cin >> coin[j];
+        }
+
+        cin >> goal;
+
+        dp[0] = 1;
+        //
+        
+        for (size_t i = 1; i <= n; ++i) {
+            
+            for (size_t j = coin[i]; j <= goal; ++j) {
+            
+                dp[j] = dp[j] + dp[j - coin[i]];
+            
+            
+            }
+        
+        }
+
+
+
+        //
+
+
+        cout << dp[goal] << endl;
+
+
+        memset(dp, 0, sizeof(dp));
+        memset(coin, 0, sizeof(coin));
+    }
+    
+
+
+
+    return 0;
+
+}*/
+
+
 
