@@ -3691,4 +3691,60 @@ int main() {
 }*/
 
 
+#include <iostream>
+#include <algorithm>
 
+using namespace std;
+
+int dp[101][100001] = { 0, };
+
+int item[2][101] = { 0, };
+
+
+int main() {
+
+
+    int n, weight;
+
+    cin >> n >> weight;
+
+    for (size_t i = 1; i <= n; ++i) {
+        
+        cin >> item[0][i] >> item[1][i];
+    
+    }
+
+
+    for (int i = 1; i <= n; ++i) {
+        
+        for (int j = 1; j <= weight; ++j) {
+            
+            if (j - item[0][i] >= 0) {
+                
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - item[0][i]] + item[1][i]);
+            
+            }
+
+            else {
+                
+                dp[i][j] = dp[i - 1][j];
+            
+            }
+        
+        
+        }
+
+        
+    
+    }
+
+
+
+
+    cout << dp[n][weight];
+
+
+
+    return 0;
+
+}
