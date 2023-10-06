@@ -3693,7 +3693,7 @@ int main() {
 
 #include <iostream>
 #include <algorithm>
-
+//boj 12865
 using namespace std;
 
 int dp[101][100001] = { 0, };
@@ -3714,7 +3714,7 @@ int main() {
     
     }
 
-
+    /*바로 아래 루프에 i j 변수 타입을 size_t로 하면 j - item[0][1]비교시 unsigned형태라 언더플로시 0보다 무조건 크므로 원하는 비교가 안되기 때문에 부호가 있는 정수형 타입을 써야함*/
     for (int i = 1; i <= n; ++i) {
         
         for (int j = 1; j <= weight; ++j) {
