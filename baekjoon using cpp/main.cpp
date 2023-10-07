@@ -3690,7 +3690,7 @@ int main() {
 
 }*/
 
-
+/*
 #include <iostream>
 #include <algorithm>
 //boj 12865
@@ -3714,7 +3714,7 @@ int main() {
     
     }
 
-    /*바로 아래 루프에 i j 변수 타입을 size_t로 하면 j - item[0][1]비교시 unsigned형태라 언더플로시 0보다 무조건 크므로 원하는 비교가 안되기 때문에 부호가 있는 정수형 타입을 써야함*/
+    //바로 아래 루프에 i j 변수 타입을 size_t로 하면 j - item[0][1]비교시 unsigned형태라 언더플로시 0보다 무조건 크므로 원하는 비교가 안되기 때문에 부호가 있는 정수형 타입을 써야함
     for (int i = 1; i <= n; ++i) {
         
         for (int j = 1; j <= weight; ++j) {
@@ -3747,4 +3747,53 @@ int main() {
 
     return 0;
 
+}*/
+
+
+
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+//boj 14728
+int chpt[2][101] = { 0, };
+int dp[101][10001] = { 0, };   
+int main() {
+
+    int num;
+    int overall;
+    cin >> num >> overall;
+
+    for (size_t i = 1; i <= num; ++i) {
+        
+        cin >> chpt[0][i] >> chpt[1][i];
+    
+    }
+
+
+    for (int i = 1; i <= num; ++i) {
+        
+        for (int j = 1; j <= overall; ++j) {
+            
+            if (j - chpt[0][i] >= 0) {
+                
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - chpt[0][i]] + chpt[1][i]);
+            
+            }
+
+            else {
+                dp[i][j] = dp[i - 1][j];
+            }
+
+        }
+
+    }
+
+
+
+    cout << dp[num][overall];
+
+
+    return 0;
 }
