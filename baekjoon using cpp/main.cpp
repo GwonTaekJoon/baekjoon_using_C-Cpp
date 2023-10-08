@@ -3750,7 +3750,7 @@ int main() {
 }*/
 
 
-
+/*
 #include <iostream>
 #include <algorithm>
 
@@ -3796,4 +3796,83 @@ int main() {
 
 
     return 0;
+}*/
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+//boj 1092
+using namespace std;
+
+vector<int> crane;
+vector<int> box;
+//int crane[50] = {0,};
+//int box[10000] = {0,};
+int main() {
+
+    int n;
+    int m;
+    int input1, input2;
+    cin >> n;
+    for (size_t i = 0; i < n; ++i) {
+        cin >> input1;
+        crane.push_back(input1);
+
+    }
+    sort(crane.begin(), crane.end());
+
+    cin >> m;
+    for (size_t i = 0; i < m; ++i) {
+        cin >> input2;
+        box.push_back(input2);
+    }
+
+    sort(box.begin(), box.end());
+
+
+    //
+
+    if (crane[n - 1] < box[m - 1]) {
+
+        cout << -1;
+        return 0;
+
+    }
+
+    int cnt = 0;
+    // 배열 기반으로 풀다가 계속 시간초과 나서 구현 쉬운 벡터 기반으로 변경
+    while (!box.empty()) {
+
+
+        ++cnt;
+        //평소 쓰던 대로 size_t 쓰면 인덱스 에러임 함부로 size_t 남발 금지
+        for (int i = crane.size() - 1; i >= 0; --i) {
+
+            for (int j = box.size() - 1; j >= 0; --j) {
+
+                if (crane[i] >= box[j]) {
+                    box.erase(box.begin() + j);
+                    break;
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+
+
+    cout << cnt;
+
+
+
+    //
+    return 0;
+
+
 }
