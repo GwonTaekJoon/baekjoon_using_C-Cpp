@@ -3799,7 +3799,7 @@ int main() {
 }*/
 
 
-
+/*
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -3822,7 +3822,7 @@ int main() {
 
     }
     sort(crane.begin(), crane.end());
-
+    
     cin >> m;
     for (size_t i = 0; i < m; ++i) {
         cin >> input2;
@@ -3875,4 +3875,216 @@ int main() {
     return 0;
 
 
+}*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <queue>
+#include <stdio.h>
+//boj 21736
+using namespace std;
+
+char map[600][602] = { 0, };
+int visited[600][600] = { 0, };
+
+int dir[4][2] = {
+    {0,1},
+    {0,-1},
+    {-1,0},
+    {1, 0}
+};
+
+int height, width;
+int cnt = 0;
+
+bool isInside(int x, int y) {
+    return (x < width&& x >= 0) && (y < height&& y >= 0);
 }
+
+void bfs(int x, int y) {
+
+    queue<pair<int, int>> q;
+    q.push({ x, y });
+    visited[y][x] = 1;
+
+    while (!q.empty()) {
+
+        int cur_x = q.front().first;
+        int cur_y = q.front().second;
+
+        q.pop();
+
+        for (size_t i = 0; i < 4; ++i) {
+
+            int next_x = cur_x + dir[i][0];
+            int next_y = cur_y + dir[i][1];
+
+            if (isInside(next_x, next_y) == false) continue;
+            if (visited[next_y][next_x] == true) continue;
+
+            visited[next_y][next_x] = 1;
+
+            if (map[next_y][next_x] != 'X') {
+                q.push({ next_x, next_y });
+
+                if (map[next_y][next_x] == 'P')  ++cnt;
+            }
+
+        }
+
+
+    }
+
+
+}
+
+
+
+char buffer[1024], * endptr;
+int main() {
+    fgets(buffer, 1024, stdin);
+    height = strtol(buffer, &endptr, 10);
+    width = atoi(endptr + 1);
+
+    int loc_x, loc_y;
+
+
+    for (size_t i = 0; i < height; i++) {
+        fgets(map[i], 602, stdin);
+    }
+
+    for (size_t i = 0; i < height; ++i) {
+
+        for (size_t j = 0; j < width; ++j) {
+            if (map[i][j] == 'I') {
+
+                loc_x = j;
+                loc_y = i;
+                break;
+            }
+
+        }
+
+    }
+
+
+
+
+    bfs(loc_x, loc_y);
+
+    if (cnt == 0)  cout << "TT";
+    else {
+        cout << cnt;
+    }
+
+    return 0;
+
+}
+*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <queue>
+//boj 14940
+using namespace std;
+
+int height, width;
+int map[1000][1000] = { 0, };
+int visited[1000][1000] = { 0, };
+int mov_dir[4][2] = {
+    {0,1},
+    {1,0},
+    {0,-1},
+    {-1,0}
+
+};
+bool isInside(int x, int y) {
+    return (x < width && x >= 0) && (y < height && y >= 0);
+
+}
+void bfs(int x, int y) {
+
+    queue<pair<int, int>> q;
+    q.push({ x,y });
+    visited[y][x] = 1;
+
+    while (!q.empty()) {
+        
+        int cur_x = q.front().first;
+        int cur_y = q.front().second;
+
+
+        q.pop();
+
+
+        for (size_t i = 0; i < 4; ++i) {
+            int next_x = cur_x + mov_dir[i][0];
+            int next_y = cur_y + mov_dir[i][1];
+            if (isInside(next_x, next_y) == 0) continue;
+            if (visited[next_y][next_x] == 1) continue;
+            if (map[next_y][next_x] == 0)    continue;
+            q.push({ next_x, next_y });
+            visited[next_y][next_x] = 1;
+            map[next_y][next_x] = map[cur_y][cur_x] + 1;
+        
+        }
+    
+    
+    
+    }
+
+
+}
+
+int main() {
+
+
+    int goal_x, goal_y;
+    cin >> height >> width;
+
+    for (size_t i = 0; i < height; ++i) {
+
+        for (size_t j = 0; j < width; ++j)
+        {
+            
+            cin >> map[i][j];
+            if (map[i][j] == 2)
+            {
+                goal_x = j;
+                goal_y = i;
+            }
+        
+        }
+    }
+
+    map[goal_y][goal_x] = 0;
+   
+
+
+    bfs(goal_x, goal_y);
+    
+    for (size_t i = 0; i < height; ++i) {
+        for (size_t j = 0; j < width; ++j) {
+            
+            if (visited[i][j] == 0 && map[i][j] != 0)  map[i][j] = -1;
+        
+        }
+    }
+    
+    for (size_t i = 0; i < height; ++i) {
+        
+        for (size_t j = 0; j < width; ++j) {
+            
+            cout << map[i][j] << " ";
+        
+        }
+        cout << endl;
+    }
+    return 0;
+
+
+}*/
