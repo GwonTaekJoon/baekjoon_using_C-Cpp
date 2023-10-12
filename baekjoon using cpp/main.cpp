@@ -4088,3 +4088,122 @@ int main() {
 
 
 }*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+//boj 18870
+using namespace std;
+
+int location[1000000] = { 0, };
+
+
+int main() {
+    vector<int> tmp;
+
+    int n;
+    cin >> n;
+    for (size_t i = 0; i < n; ++i) {
+        cin >> location[i];
+        tmp.push_back(location[i]);
+    }
+
+
+
+    sort(tmp.begin(), tmp.end());   
+
+    tmp.erase(unique(tmp.begin(), tmp.end()), tmp.end());
+
+    for (size_t i = 0; i < n; ++i) {
+        
+       int idx = lower_bound(tmp.begin(), tmp.end(), location[i]) - tmp.begin();
+       cout << idx << " ";
+
+    }
+
+
+
+    return 0;
+
+}*/
+
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+
+//boj 11724
+
+using namespace std;
+
+int node, edge;
+int map[1001][1001] = {0,};
+int visited[1001] = { 0, };
+
+void bfs(int node_num) {
+    
+
+    queue<int> q;
+    q.push(node_num);
+    visited[node_num] = 1;
+
+    while (!q.empty()) {
+        
+        int cur_pos = q.front();
+        q.pop();
+
+            
+        for (size_t i = 1; i <= node; ++i) {
+            if (map[cur_pos][i] == 1 && visited[i] == 0)
+            {
+
+                visited[i] = 1;
+                q.push(i);
+
+            }
+
+        
+        }
+    
+    
+    }
+
+
+   
+
+}
+
+int main() {
+
+    cin >> node >> edge;
+    int input1, input2;
+    int cnt = 0;
+
+    //문제 똑바로 읽자 이 문제에서는 무조건 인덱스가 1로 시작해야 한다.
+    for (size_t i = 1; i <= edge; ++i) {
+        cin >> input1 >> input2;
+        map[input1][input2] = 1;
+        map[input2][input1] = 1;
+    }
+
+
+    for (size_t i = 1; i <= node; ++i) {
+        
+        if (visited[i] == 1) continue;
+        bfs(i);
+        ++cnt;
+    
+    }
+
+
+    cout << cnt;
+
+
+
+    return 0;
+
+}
