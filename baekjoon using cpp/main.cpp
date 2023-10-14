@@ -4131,6 +4131,8 @@ int main() {
 }*/
 
 
+
+/*
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -4207,3 +4209,241 @@ int main() {
     return 0;
 
 }
+*/
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <queue>
+#include <functional>
+
+using namespace std;
+int main() {
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(NULL);
+    //cout.tie(NULL);
+    //c++입출력을 쓸거면 위에 3개로 입출력 최적화를 하던가 c버전 입출력만을 사용해야 시간초과가 안뜸
+    priority_queue<int, vector<int>, greater<int>> pq;
+
+    int num;
+    cin >> num;
+    int input;
+
+    for (size_t i = 0; i < num; ++i) {
+        
+        scanf("%d",&input);
+        //cin >> input;
+        if (input == 0) {
+            if (!pq.empty()) {
+                int tmp = pq.top();
+                printf("%d\n",tmp);
+                //cout << tmp << "\n";
+                pq.pop();
+                continue;
+            }
+            else {
+                printf("0\n");
+                //cout << 0 << "\n";
+            }
+
+        }
+        else{
+            pq.push(input);
+
+        }
+    
+    }
+
+
+        
+
+    return 0;
+}
+*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+//boj 11659
+using namespace std;
+int input[100010] = { 0, };
+int main() {
+
+    int n_inputs, n_sections;
+    int section_start, section_end;
+    scanf("%d %d", &n_inputs, &n_sections);
+
+    //단순하게 입력값을 받고 입력받은 구간의 범위를 인덱싱해서 더하면 시간 초과 나니까 슬라이딩 윈도우 기법을 사용해야 함.
+    for (size_t i = 1; i <= n_inputs; ++i) {
+        
+        scanf("%d", &input[i]);
+        input[i] += input[i - 1];
+    }
+    
+
+    for (size_t i = 0; i < n_sections; ++i) {
+        
+        scanf("%d %d", &section_start, &section_end);
+
+        printf("%d\n", input[section_end] - input[section_start - 1]);
+    
+    }
+
+
+    return 0;
+}*/
+
+
+
+/*
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <map>
+//boj 1620
+using namespace std;
+
+string name;
+string pokemon_String[100010];
+char buf[32];
+int main() {
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ios_base::sync_with_stdio(false);
+
+    map<string, int> pokemon_Map;
+    int n, m;
+    int input_idx;
+
+    cin >> n >> m;
+    for (size_t i = 0; i < n; ++i) {
+        cin >> pokemon_String[i];
+        pokemon_Map.insert({ pokemon_String[i], i});
+
+    }
+
+    for (size_t i = 0; i < m; ++i) {
+        
+        cin >> name;
+        if (isdigit(name[0]) != 0) {//숫자인 경우
+            
+            input_idx = stoi(name) - 1;
+            cout << pokemon_String[input_idx] <<"\n";
+        }
+
+
+        else {
+            auto idx = pokemon_Map.find(name);
+            cout << idx->second + 1 << "\n";
+                
+
+        
+        
+        }
+    }
+
+
+
+    return 0;
+}
+*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <map>
+#include <vector>
+using namespace std;
+//boj 1764
+int main() {
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    int cnt = 0;
+    string input_name;
+    map<string, int> no_listen_list;
+    vector<string> overlook_list;
+    int n, m;
+
+    cin >> n >> m;
+
+    for (size_t i = 0; i < n; ++i) {
+        
+        cin >> input_name;
+        no_listen_list.insert({input_name, true});
+    
+    }
+
+    for (size_t i = 0; i < m; ++i) {
+        
+        cin >> input_name;
+        if (no_listen_list[input_name]) {
+            ++cnt;
+            overlook_list.push_back(input_name);
+        }
+    
+    
+    }
+    cout << cnt << "\n";
+    sort(overlook_list.begin(), overlook_list.end());
+    for (size_t i = 0; i < overlook_list.size(); ++i) {
+        cout << overlook_list.at(i) << "\n";
+    }
+
+    return 0;
+}*/
+
+
+
+/*
+#include <iostream>
+#include <algorithm>
+
+//boj 11723
+using namespace std;
+
+int main() {
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ios_base::sync_with_stdio(NULL);
+
+    string input_operator;
+    int m, input_operand;
+    int bit_mask = 0;
+    cin >> m;
+    for (size_t i = 0; i < m; ++i) {
+
+        cin >> input_operator;
+        if (input_operator == "add") {
+            cin >> input_operand;
+            bit_mask |= (1 << input_operand);
+        }
+
+        else if (input_operator == "remove") {
+            cin >> input_operand;
+            bit_mask &= ~(1 << input_operand);
+        }
+        else if (input_operator == "check") {
+            cin >> input_operand;
+            if (bit_mask & (1 << input_operand)) { cout << "1\n"; }
+            else { cout << "0\n"; }
+        }
+        else if (input_operator == "toggle") {
+            cin >> input_operand;
+            if (bit_mask & 1 << input_operand) { bit_mask &= ~(1 << input_operand); }
+            else { bit_mask |= (1 << input_operand); }
+        }
+
+        else if (input_operator == "all") { bit_mask = (1 << 21) - 1; }
+        else if (input_operator == "empty") bit_mask = 0;
+    
+    }
+
+
+    return 0;
+}*/
+
+
+
