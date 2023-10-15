@@ -4217,6 +4217,7 @@ int main() {
 #include <queue>
 #include <functional>
 
+//boj 1927
 using namespace std;
 int main() {
     //ios_base::sync_with_stdio(false);
@@ -4402,6 +4403,7 @@ int main() {
 #include <algorithm>
 
 //boj 11723
+// class 3 essential clear
 using namespace std;
 
 int main() {
@@ -4444,6 +4446,58 @@ int main() {
 
     return 0;
 }*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <queue>
+#include <functional>
+using namespace std;
+//boj 11729
+int main() {
+
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ios_base::sync_with_stdio(NULL);
+
+    int input_times;
+    int input_num;
+    cin >> input_times;
+
+    priority_queue<int, vector<int>> pq;
+    for (size_t i = 0; i < input_times; ++i) {
+        
+        cin >> input_num;
+        if (input_num == 0) {
+            if (!pq.empty()) {
+                
+                int tmp_top = pq.top();
+                cout << tmp_top << "\n";
+                pq.pop();
+                continue;
+
+            
+            }
+            cout << 0 << "\n";
+        
+        }
+        else {
+            pq.push(input_num);
+
+        }
+
+        
+    
+    }
+
+
+
+
+    return 0;
+
+}
+*/
 
 
 
