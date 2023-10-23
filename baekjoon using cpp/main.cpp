@@ -4500,4 +4500,202 @@ int main() {
 */
 
 
+/*
+#include <iostream>
+#include <algorithm>
+//boj 2240
+using namespace std;
+int plum_list[1001] = { 0, };
+int dp[1001][3][31] = { 0, };  // 1001 -> 자두갯수  3 -> 위치  31 -> 횟수
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int plum_num, mov_input;
+    cin >> plum_num >> mov_input;
+    for (size_t i = 1; i <= plum_num; ++i) {
+        cin >> plum_list[i];
+    }
+
+    dp[0][1][mov_input] = 0;
+    //0초 처음위치 움직일 수 있는 횟수
+
+    for (size_t i = 0; i < plum_num; ++i) {
+        for (size_t j = 1; j <= 2; ++j) {
+            for (size_t k = 0; k <= mov_input; ++k) {
+                if (dp[i][j][k] >= 0) {
+                    int next_pos = plum_list[i + 1];
+                    if (next_pos == j) {
+                        dp[i + 1][j][k] = dp[i][j][k] + 1;
+                    }
+                    else {
+                        if (k != 0) {
+                            dp[i + 1][next_pos][k - 1] = max(dp[i + 1][next_pos][k - 1], dp[i][j][k] + 1);
+                        }
+                        dp[i + 1][j][k] = dp[i][j][k];
+                    }
+                }
+            }
+        }
+    }
+
+    int answer = 0;
+    
+    for (size_t i = 1; i <= 2; ++i) {
+
+        for (size_t j = 1; j <= plum_num; ++j) {
+        
+            answer = max(answer, dp[j][i][0]);
+        
+        }
+        for (size_t j = 0; j <= mov_input; ++j) {
+            answer = max(answer, dp[plum_num][i][j]);
+        }
+    }
+    
+    
+    
+
+    cout << answer;
+    return 0;
+}
+*/
+
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <vector>
+//boj2624
+using namespace std;
+int money[10010] = { 0, };
+int dp[10010][110] = { 0, };
+
+int main() {
+
+    int amount;
+    int type_input;
+    int input1, input2;
+    vector<pair<int, int>> coin;
+
+    cin >> amount >> type_input;
+    coin.push_back({ 0,0 });
+    //벡터 인덱스 1부터 쓰기 위해서 패딩 추가
+    for (size_t i = 1; i <= type_input; ++i) {
+
+        cin >> input1 >> input2;
+        coin.push_back({ input1, input2 });
+    }
+
+    for (size_t i = 1; i <= type_input; ++i) {
+
+        dp[0][i - 1] = 1;
+
+        int value = coin[i].first;
+        int cnt = coin[i].second;
+
+        for (size_t j = 0; j <= amount; ++j) {
+
+            if (dp[j][i - 1] == 0)   continue;
+            for (size_t k = 0; k <= cnt; ++k) {
+                if (j + k * value > amount)  continue;
+                dp[j + k * value][i] += dp[j][i - 1];
+            }
+
+
+        }
+
+
+
+    }
+
+    cout << dp[amount][type_input];
+
+    return 0;
+
+}*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <climits>
+//boj18111
+using namespace std;
+
+int map[500][500] = { 0, };
+//이 문제 최적화 하고 싶으면 높이 판별을 0 ~ 256이 아니라 입력받은 값 한해서만 하면 될 듯
+int main() {
+
+    int n, m;
+    int input_inventory;
+    int answer_time = INT_MAX;
+    int answer_height = 0;    cin.tie(0);
+    cout.tie(0);
+    ios::ios_base::sync_with_stdio(0);
+
+    cin >> n >> m >> input_inventory;
+
+    for (size_t i = 0; i < m; ++i) {
+        for (size_t j = 0; j < n; ++j) {
+
+            cin >> map[j][i];
+        }
+    }
+
+
+    for (size_t i = 0; i <= 256; ++i) {
+        int cost = 0;
+        int inventory = input_inventory;
+
+        for (size_t width = 0; width < m; ++width) {
+            for (size_t height = 0; height < n; ++height) {
+
+                if (i == map[height][width])  continue;
+                else if (i < map[height][width]) {
+                    int block = map[height][width] - i;
+                    inventory += block;
+                    cost = cost + block * 2;
+                }
+
+                else { // i > map[height][width]
+                    int block = i - map[height][width];
+                    inventory -= block;
+                    cost = cost + block;
+                }
+
+
+            }
+        }
+
+        if (inventory < 0) {
+            continue;
+        }
+
+        if (cost < answer_time) {
+            answer_time = cost; 
+            answer_height = i;
+
+        }
+        if (cost == answer_time)
+        {
+            if (answer_height < i) {
+                answer_height = i;
+            }
+        }
+
+
+
+
+
+    }
+
+    cout << answer_time << " " << answer_height;
+
+    return 0;
+}*/
+
 
