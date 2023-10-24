@@ -4699,3 +4699,85 @@ int main() {
 }*/
 
 
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <climits>
+//boj 14889
+using namespace std;
+int map[21][21] = { 0 };
+int visited[21] = { 0, };
+int map_size;
+int start_team_score = 0;
+int link_team_score = 0;
+int diff = 0;
+int answer = INT_MAX;
+
+void calculate() {
+    start_team_score = 0;
+    link_team_score = 0;
+    for (size_t i = 1; i <= map_size; ++i) {
+        for (size_t j = 1; j <= map_size; ++j) {
+            if (visited[i] == 1 && visited[j] == 1) {
+                start_team_score += map[i][j];
+                
+            }
+            else if(visited[i] == 0 && visited[j] == 0) {
+                link_team_score += map[i][j];
+            }
+        }
+    }
+    diff = abs(start_team_score - link_team_score);
+    answer = min(answer, diff);
+
+}
+
+void dfs(int cnt, int player) {
+    if (cnt == map_size / 2) {
+        calculate();
+        return;
+    }
+
+    for (size_t i = player; i <= map_size; ++i) {
+        visited[i] = true;
+        dfs(cnt + 1, i + 1);
+        visited[i] = false;
+        //backtracking
+    }
+}
+int main() {
+
+    cin.tie(NULL);
+    cout.tie(NULL);
+    ios::ios_base::sync_with_stdio(0);
+
+    
+
+    cin >> map_size;
+
+    for (size_t i = 1; i <= map_size; ++i) {
+        for (size_t j = 1; j <= map_size; ++j) {
+            cin >> map[i][j];
+        }
+    }
+
+    
+
+    dfs(0, 1);
+        
+    cout << answer;
+
+
+
+
+
+
+
+    return 0;
+
+}*/
+
+
+
+
