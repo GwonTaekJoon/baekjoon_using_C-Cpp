@@ -4779,5 +4779,128 @@ int main() {
 }*/
 
 
+/*
+#include <iostream>
+#include <algorithm>
+//boj 10157
+using namespace std;
+
+int map[1001][1001] = { 0, };
+int width, height;
+
+bool isInside(int x, int y) {
+    return (x >= 1 && x <= width) && (y >= 1 && y <= height);
+}
+
+int mov_dir[2][4] = { {1,0,-1,0}, 
+                      {0,1,0,-1} }; 
+
+int main() {
+    int waiting_number;
+
+    cin >> width >> height;
+    cin >> waiting_number;
+
+    if (waiting_number > width * height) {
+        cout << 0;
+        return 0;
+    }
+
+    int cur_x = 1;
+    int cur_y = 1; 
+    int idx = 0;
+
+    int y_dir = mov_dir[0][idx];
+    int x_dir = mov_dir[1][idx];
+
+    for (int i = 1; i <= waiting_number; i++) {
+        map[cur_y][cur_x] = i;
+
+        if (i == waiting_number) {
+            cout << cur_x << " " << cur_y;
+            return 0;
+        }
+
+        int next_x = cur_x + x_dir;
+        int next_y = cur_y + y_dir;
+
+        if (!isInside(next_x, next_y) || map[next_y][next_x] != 0) {
+            idx = (idx + 1) % 4;
+            y_dir = mov_dir[0][idx];
+            x_dir = mov_dir[1][idx];
+        }
+
+        cur_y += y_dir;
+        cur_x += x_dir;
+    }
+
+    return 0;
+}
+
+
+*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <climits>
+#include <cmath>
+#include <cstdlib>
+//boj 1107
+/처음에는 정상인 버튼으로 만들 수 있는 숫자들의 중복순열을 구해서 각각의 중복순열이 이동할 채널에 가장 차이가 적은 숫자를 구하면
+//해결이 되는 문제인줄 알았지만 오히려 답지 보니까 생각보다 더 단순한 문제였다..
+using namespace std;
+
+int broken_button[10] = { 0, };
+
+
+bool isBroken(int num) {
+    string str = to_string(num);
+    for (size_t i = 0; i < str.length(); ++i) {
+        if (broken_button[str[i] - '0'] == 1)
+            return false;
+    }
+    return true;
+}
+int main() {
+
+    int goal_channel;
+    int broken_buttons_nums;
+    int broken_button_input;
+    int min_cost;
+    cin >> goal_channel;
+    cin >> broken_buttons_nums;
+
+    for (size_t i = 0; i < broken_buttons_nums; ++i) {
+        cin >> broken_button_input;
+        broken_button[broken_button_input] = 1;
+
+    }
+
+    if(goal_channel == 100) {
+        cout << 0;
+        return 0;
+    }
+
+    min_cost = abs(goal_channel - 100);
+
+    for (int i = 0; i <= 1000000; ++i) {
+        if (isBroken(i) == true) {
+            int tmp_cost = abs(goal_channel - i) + to_string(i).length();
+            min_cost = min(min_cost, tmp_cost);
+        }
+    }
+
+
+    cout << min_cost;
+
+    return 0;
+
+}
+
+
+*/
 
 
