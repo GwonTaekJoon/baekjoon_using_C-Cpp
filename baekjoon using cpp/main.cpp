@@ -4904,3 +4904,82 @@ int main() {
 */
 
 
+/*
+#include <iostream>
+#include <algorithm>
+#include <climits>
+//boj 13398
+using namespace std;
+
+int arr[100001] = { 0, };
+int dp[100001] = {0,};
+int minus_dp[100001] = { 0, };
+int main() {
+
+    cin.tie(0);
+    cout.tie(0);
+    ios::ios_base::sync_with_stdio(0);
+
+    int input_num;
+    int minus_idx_num = 0;
+    int answer = INT_MIN;
+    cin >> input_num;
+    for (size_t i = 0; i < input_num; ++i) {
+
+        cin >> arr[i];
+    }
+
+    dp[0] = arr[0];
+    minus_dp[0] = arr[0];
+    answer = arr[0];
+    for (size_t i = 1; i < input_num; ++i) {
+        dp[i] = max(dp[i - 1] + arr[i], arr[i]);
+        minus_dp[i] = max(dp[i - 1], arr[i] + minus_dp[i - 1]);
+        answer = max(answer, max(dp[i], minus_dp[i]));
+
+    }
+
+
+
+    cout << answer;
+
+    //for (size_t i = 1; i <= input_num; ++i) {
+    //    cin >> arr[i];
+    //    dp[i] = max(dp[i - 1] + arr[i], arr[i]);
+    //    answer = max(answer, dp[i]);
+    //    if (arr[i] < 0) {
+    //        minus_idx[minus_idx_num] = i;
+    //        ++minus_idx_num;
+    //    }
+    //
+    //}
+    //
+    //
+    //
+    //
+    //for (size_t i = 0; i < minus_idx_num; ++i) {
+    //    int tmp = arr[minus_idx[i]];
+    //    arr[minus_idx[i]] = 0;
+    //
+    //    int localMax = INT_MIN;
+    //    int sum = 0;
+    //    for (size_t j = 1; j <= input_num; ++j) {
+    //        sum = max(sum + arr[j], arr[j]);
+    //        localMax = max(localMax, sum);
+    //    }
+    //
+    //    answer = max(answer, localMax);
+    //    arr[minus_idx[i]] = tmp;
+    //}
+    //cout << answer;
+    //기존에는 이 주석 코드처럼 마이너스 요소를 0으로 바꾸고 
+    //다시 dp배열을 계산하고 다시 복구시킨 후 다음 마이너스 값을
+    //0으로 바꾸는 패턴으로 하였지만 시간초과로 로직을 바꾸게 됨
+
+
+
+    return 0;
+
+}*/
+
+
