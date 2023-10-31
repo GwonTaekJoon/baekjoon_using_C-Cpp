@@ -4983,3 +4983,234 @@ int main() {
 }*/
 
 
+
+/*
+#include <iostream>
+#include <algorithm>
+#define MOD 1000000007
+using namespace std;
+//boj 13172
+
+long long gcd(int a, int b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+
+long long custom_pow(long long n, long long m) {
+    //빠른 거듭제곱
+    long long ret = 1;
+    while (m) {
+        if (m & 1) ret = ret * n % MOD;
+        m = m / 2;
+        n = n * n % MOD;
+    }
+    return ret;
+}
+
+
+int main() {
+
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    long long dice_num;
+    long long dice_face;
+    long long dice_sum;
+    long long answer = 0;
+    cin >> dice_num;
+
+    for (size_t i = 0; i < dice_num; ++i) {
+        cin >> dice_face >> dice_sum;
+        answer += (dice_sum * (custom_pow(dice_face, MOD - 2))) % MOD;
+    }
+
+
+    cout << answer % MOD;
+
+
+
+    return 0;
+}*/
+
+/*
+#include <iostream>
+#include <queue>
+#include <algorithm>
+//boj 2229
+using namespace std;
+
+
+int students[1000] = {0, };
+int dp[1000] = {0, };
+int main() {
+
+    int students_num;
+    cin >> students_num;
+    
+    for (size_t i = 0; i < students_num; ++i) {
+        cin >> students[i];
+    }
+    
+    for (int i = 1; i < students_num; ++i) {
+        int max_tmp = students[i];
+        int min_tmp = students[i];
+        for (int j = i; j >= 0; --j) {
+            max_tmp = max(students[j], max_tmp);
+            min_tmp = min(students[j], min_tmp);
+            if (j > 0) {
+                dp[i] = max(dp[i], dp[j - 1] + max_tmp - min_tmp);
+            }
+            else {
+                dp[i] = max(dp[i], max_tmp - min_tmp);
+            }
+        }
+    }
+
+
+    cout << dp[students_num - 1];
+
+
+    return 0;
+
+}*/
+
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <climits>
+//boj 2343
+using namespace std;
+
+int lesson[100000] = { 0, };
+
+int main() {
+
+    int lesson_num;
+    int blueray_num; 
+    int sum = 0;
+    int low = INT_MIN;
+    int high = 0;
+    cin >> lesson_num >> blueray_num;
+
+    for (size_t i = 0; i < lesson_num; ++i) {
+        cin >> lesson[i];
+        high += lesson[i];
+        low = max(low, lesson[i]);
+        //이분 탐색시 필요한 최저는 강의 목록 중 가장 시간이 긴 것
+        //최고는 레슨 시간들의 총합
+    }
+    
+    while (low <= high) {
+
+        int cnt = 0;
+        int tmp = 0;
+        int mid = (low + high) / 2; //임시 가정 블루레이 크기
+
+        for (size_t i = 0; i < lesson_num; ++i) {
+            if (tmp + lesson[i] > mid) {
+                tmp = 0;
+                ++cnt;
+                //모든 레슨 하나씩 담으면서 
+                //가정한 블루레이 크기보다 커지면
+                //블루레이 갯수 한개 증가 
+            }
+            tmp += lesson[i];
+        }
+        //
+        if (tmp != 0) ++cnt;
+
+        //반복문 돌면서 현재 가정 블루레이 수와
+        //목표 블루레이 수를 비교하며 
+        //이분탐색을 활용해서 목표 블루레이 수에 맞춘다.
+        if (cnt <= blueray_num) {
+            high = mid - 1;
+
+        }
+        else {
+            low = mid + 1;
+        }
+
+    }
+
+    cout << low;
+
+    return 0;
+
+}
+
+*/
+
+
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <climits>
+
+//boj 2470
+using namespace std;
+
+int num[100000] = { 0, };
+
+int main() {
+
+    int answer_l;
+    int answer_r;
+ 
+
+    int input;
+    cin >> input;
+
+
+    int cur_l = 0;
+    int cur_r = input - 1;
+
+    int min_tmp = INT_MAX;
+
+    for (size_t i = 0; i < input; ++i) {
+        cin >> num[i];
+
+    }
+
+    sort(num, num + input);
+
+
+    while (cur_l < cur_r) {
+        //처음에 cur_l <= cur_r했다가 틀리길래 생각해봤더니
+        //이 문제의 투 포인터 접근법에서는 항상 cur_l이 
+        //cur_r보다 윈쪽에 있는 것이 보장되어야 한다.
+        int sum = num[cur_l] + num[cur_r];
+        int diff = abs(num[cur_l] + num[cur_r]);
+
+        if (sum == 0) {
+            answer_l = cur_l;
+            answer_r = cur_r;
+            break;
+
+        }
+
+        if (min_tmp > diff)
+        {
+            answer_l = cur_l;
+            answer_r = cur_r;
+            min_tmp = diff;
+        }
+
+        if (sum < 0)    ++cur_l;
+        else --cur_r;
+    }
+
+
+    cout << num[answer_l] << " " << num[answer_r];
+
+
+    return 0;
+}
+
+
+
