@@ -5146,7 +5146,7 @@ int main() {
 
 
 
-
+/*
 #include <iostream>
 #include <algorithm>
 #include <cmath>
@@ -5212,5 +5212,235 @@ int main() {
     return 0;
 }
 
+
+*/
+
+
+
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <climits>
+//boj 9024
+using namespace std;
+
+
+int arr[1000000] = { 0, };
+int main() {
+
+    ios::ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int testcase;
+    cin >> testcase;
+    
+
+    int input_num;
+    int goal_num;
+    for (size_t i = 0; i < testcase; ++i) {
+        
+        cin >> input_num >> goal_num;
+        for (size_t i = 0; i < input_num; ++i) {
+            
+            cin >> arr[i];
+        }
+        sort(arr, arr + input_num);
+        
+        int low = 0;
+        int high = input_num - 1;
+        int diff_num = INT_MAX;
+        int answer = 0;
+
+        while (low < high) {
+            int left_num = arr[low];
+            int right_num = arr[high];
+
+            if (goal_num == left_num + right_num)
+            {
+                ++low;
+                --high;
+
+            }
+
+            else if (goal_num < left_num + right_num) {
+                --high;
+            }
+
+            else {
+                ++low;
+            }
+
+
+            if (abs(goal_num - (left_num + right_num)) < diff_num)
+            {
+                diff_num = abs(goal_num - (left_num + right_num));
+                answer = 1;
+            }
+            else if (abs(goal_num - (left_num + right_num)) == diff_num) {
+                ++answer;
+            }
+
+        }
+
+        cout << answer << endl;
+
+    }
+
+    return 0;
+}*/
+
+
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <climits>
+
+//boj2467
+using namespace std;
+
+
+int solution[100000] = { 0, };
+int main() {
+
+    int input_cnt;
+
+    cin >> input_cnt;
+
+    for (size_t i = 0; i < input_cnt; ++i) {
+        
+        cin >> solution[i];
+    
+    
+    }
+
+    int low = 0;
+    int high = input_cnt - 1;
+
+    int answer_l = low;
+    int answer_r = high;
+
+
+    int mid = INT_MAX;
+    while (low < high) {
+        
+        if (solution[high] + solution[low] == 0) {
+            
+            cout << solution[low] << solution[high];
+            return 0;
+
+        }
+        
+        if (abs(solution[high] + solution[low]) < mid) {
+            
+            mid = abs(solution[high] + solution[low]);
+            answer_l = low;
+            answer_r = high;
+            
+
+        }
+
+        if (solution[high] + solution[low] < 0) {
+            ++low;
+        }
+            
+        else {
+            --high;
+        }
+    
+    
+    }
+
+
+
+
+    cout << solution[answer_l] << " " << solution[answer_r];
+
+
+
+
+
+    return 0;
+
+}*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+boj 2110
+using namespace std;
+
+int stall[200000] = { 0, };
+
+int main() {
+
+    cin.tie(0);
+    cout.tie(0);
+    ios_base::sync_with_stdio(0);
+
+    int barn_size;
+    int cow_num;
+    cin >> barn_size >> cow_num;
+
+    for (size_t i = 0; i < barn_size; ++i) {
+
+        cin >> stall[i];
+
+    }
+
+
+    sort(stall, stall + barn_size);
+    int answer = 0;
+    int lo = 1;
+    int hi = stall[barn_size - 1] - stall[0];
+
+    while (lo <= hi) {
+
+        int mid = (lo + hi) / 2;
+        int cnt = 1; //기본적으로 소 한 마리 위치시키고 시작
+        int starting_point = stall[0];  //처음엔 첫 번째 자리에 소를 자리잡고
+        //나머지 소를 놓기 때문에 스타팅 포인트를 첫번째 요소로 지정
+
+        for (size_t i = 1; i < barn_size; ++i) {
+            if (mid <= stall[i] - starting_point) { //소를 위치시킬 때 현재 기준으로 잡은 거리 안에 위치가 가능한가
+                ++cnt; //가능할 시 소를 놓고 현재 자리잡은 소의 수 증가
+                starting_point = stall[i]; //현재 자리잡은 소를 스타팅포인트로 지정하고 다음 자리잡을 소와 거리 비교
+
+            }
+
+
+        }
+
+
+        if (cnt >= cow_num) {
+            // 소를 다 놓을 수 있을 시 거리 늘려보기  
+            answer = mid;
+            lo = mid + 1;
+
+        }
+
+        else
+        {
+            //소를 다 놓을 수 없다면 기준 거리 좁혀보기
+            hi = mid - 1;
+        }
+
+
+
+    }
+
+    cout << answer;
+
+
+    return 0;
+
+}
+
+*/
 
 
