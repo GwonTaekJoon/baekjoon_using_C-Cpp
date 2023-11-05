@@ -5528,3 +5528,84 @@ int main() {
 */
 
 
+
+/*
+#include <iostream>
+#include <algorithm>
+
+//boj 1477
+using namespace std;
+
+int installed_rest[50] = { 0, };
+
+
+int main() {
+
+    cin.tie(0);
+    cout.tie(0);
+    ios_base::sync_with_stdio(0);
+
+    int installed_rest_input;
+    int add_rest;
+    int highway_length;
+    int answer = 9999;
+
+    cin >> installed_rest_input>> add_rest >> highway_length;
+
+    for (size_t i = 1; i <= installed_rest_input; ++i) {
+        
+        cin >> installed_rest[i];
+
+    }
+
+    installed_rest[0] = 0;
+    installed_rest[installed_rest_input + 1] = highway_length;
+    //이 부분 때문에 못풀다가 답지 보고 깨달았다.
+    //고속도로의 시작점 부터 첫 휴게소 까지의 거리도 차이가 있기 때문에 그 사이에 휴게소를 추가할 경우의 수도 판단해야 하기 때문에
+    //시작점도 추가해야하고 마찬가지로 고속도로의 끝점에서 마지막 휴게소 사이에서도 휴게소를 추가할 수 있기에 고속도로의 길이도 넣어야한다. 
+
+    sort(installed_rest, installed_rest + installed_rest_input + 2);
+
+
+    int lo = 1;
+    int hi = highway_length - 1;
+
+    while (lo <= hi) {
+
+        int mid = (lo + hi) / 2;
+        int added_rest = 0;
+    
+        for (size_t i = 1; i < installed_rest_input + 2; ++i) {
+
+            int diff = installed_rest[i] - installed_rest[i - 1];
+            int cnt = diff / mid;
+
+            if (cnt > 0) {
+
+
+                if (diff % mid == 0) added_rest += cnt - 1;
+                else added_rest += cnt;
+
+            }
+        }
+
+        if (added_rest > add_rest)   lo = mid + 1;
+        else {
+            
+            hi = mid - 1;
+            answer = min(answer, mid);
+
+
+        }
+    
+    }
+
+    cout << answer;
+
+    return 0;
+}
+*/
+
+
+
+
