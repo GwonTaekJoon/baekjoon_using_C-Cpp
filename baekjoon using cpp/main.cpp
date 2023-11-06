@@ -5607,5 +5607,79 @@ int main() {
 */
 
 
+/*
+#include <iostream>
+#include <algorithm>
+//boj 17951
+using namespace std;
+
+int test_paper[100000] = { 0, };
+
+int main() {
+
+    cin.tie(0);
+    cout.tie(0);
+    ios_base::sync_with_stdio(0);
+
+    int test_paper_num;
+    int group_num;
+    int hi = 0;
+
+    cin >> test_paper_num >> group_num;
+
+    for (size_t i = 0; i < test_paper_num; ++i) {
+
+        cin >> test_paper[i];
+        hi += test_paper[i];
+    }
 
 
+
+
+
+    int lo = 0;
+    while (lo <= hi) {
+
+
+        int mid = (lo + hi) / 2;
+        int sum = 0;
+        int cnt = 0;
+
+        for (int i = 0; i < test_paper_num; ++i) {
+
+            sum += test_paper[i];
+            if (mid <= sum) {
+
+                ++cnt;
+                sum = 0;
+
+            }
+
+        }
+
+        if (cnt >= group_num) {
+
+            lo = mid + 1;
+
+        }
+
+
+        else {
+            hi = mid - 1;
+        }
+
+
+
+    }
+
+
+    cout << hi;
+
+
+
+    return 0;
+
+
+}
+
+*/
