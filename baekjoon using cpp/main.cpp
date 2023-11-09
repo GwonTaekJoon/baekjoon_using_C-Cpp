@@ -5683,3 +5683,92 @@ int main() {
 }
 
 */
+
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+//boj 13397
+int scores[5000] = { 0, };
+
+int main() {
+
+
+    int score_num;
+    int group_num;
+    int answer = INT_MAX;
+
+    int input_sum = 0;
+    int input_max = INT_MIN;
+
+    cin >> score_num >> group_num;
+
+
+    for (size_t i = 0; i < score_num; ++i) {
+
+        cin >> scores[i];
+        input_max = max(input_max, scores[i]);
+
+    }
+
+
+
+    int lo = 0;
+    int hi = input_max;
+    //hi를 입력받은 배열의 요소 중 최댓값으로 두는 이유는
+    //구간의 점수가 최댓값 - 최솟값이기 때문에
+    //우리가 이분 탐색의 구간을 요소 중 최댓값으로 두면
+    //우리가 원하는 탐색의 범위에 모두 커버가 가능하다.
+    while (lo <= hi) {
+
+        int mid = (lo + hi) / 2;
+        int diff = 0;
+        int min_score = scores[0];
+        int max_score = scores[0];
+        int cnt = 1;
+        for (size_t i = 0; i < score_num; ++i) {
+
+            min_score = min(min_score, scores[i]);
+            max_score = max(max_score, scores[i]);
+            //mid값을 문제에서 요구하는 구간 점수의 최댓값의 최소로 잡아서
+            //이분 탐색을 할 때 마다 배열을 순회하며 
+            //최댓값과 최솟값을 구하며 구간으 점수를 구하고
+            //mid값을 넘을 시 현재 그룹의 갯수를 늘린다.
+            //이후 그룹의 갯수에 따라서 가능하다면 범위를 좁히고
+            //목표 그룹의 갯수보다 많다면 mid값을 기존보다 크게 조정한다.
+            if (max_score - min_score > mid) {
+
+                ++cnt;
+                min_score = scores[i];
+                max_score = scores[i];
+            }
+
+        }
+
+        if (cnt <= group_num) {
+
+            if (answer > mid) answer = mid;
+            hi = mid - 1;
+
+
+        }
+        else {
+
+            lo = mid + 1;
+
+        }
+
+    }
+
+
+
+    cout << answer;
+
+
+
+    return 0;
+}*/
+
