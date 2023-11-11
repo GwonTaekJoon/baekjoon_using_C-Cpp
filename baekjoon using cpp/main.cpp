@@ -5772,3 +5772,51 @@ int main() {
     return 0;
 }*/
 
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+//boj 3151
+using namespace std;
+
+long long student_ability[10000] = { 0, };
+int main() {
+
+    int student_num;
+    long long answer = 0;
+    cin >> student_num;
+
+    for (size_t i = 0; i < student_num; ++i) {
+        
+        cin >> student_ability[i];
+    
+    }
+
+    sort(student_ability, student_ability + student_num);
+
+
+    for (size_t i = 0; i < student_num - 1; ++i) {
+        for (size_t j = i + 1; j < student_num; ++j) {
+            
+            long long first_second_sum = student_ability[i] + student_ability[j];   
+            //단순히 배열을 이중으로 순회하며 첫번째와 두번째 요소를 더해 
+            // 더한 값의 마이너스가 되는 즉, 더하면 바로 0이 되는 값의 구간을 구한다.
+            //여기서 직접 요소를 찾아 더해서 일일히 카운트하는 것이 아닌 
+            // 문제 자체에서 중복된 값이 나올 수 있기에 첫 번재 요소와 두 번재 요소를 더한 값의 마이너스가 되는 구간을 구하여
+            //한 번에 한 순회 사이클에서 고른 첫 번째 요소와 두 번째 요소에 대한 목표 값의 구간을 통해 갯수를 가능한 횟수를 한 번에 더한다.
+            long long* target_starting = lower_bound(student_ability + j + 1, student_ability + student_num, -first_second_sum);
+            long long* target_end = upper_bound(student_ability + j + 1, student_ability + student_num, -first_second_sum);
+
+            answer += abs((target_starting - target_end));
+            //abs함수를 사용해서 절댓값으로 바꾸는 이유는 포인터간의 크기 차이 즉, 변수 주소간의 차이라 포인터 변수 값을 출력해보면 대부분 음수가 나온다.
+            //결과가 음수가 나와서 절댓값을 취해야 우리가 원하는 답이 나온다.
+        }
+    }
+
+    cout << answer;
+
+    return 0;
+}*/
+
+
