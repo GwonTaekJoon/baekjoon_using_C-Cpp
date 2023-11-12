@@ -5820,3 +5820,75 @@ int main() {
 }*/
 
 
+
+/*
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <climits>
+
+//boj1916
+using namespace std;
+
+int dist[1001];
+vector<pair<int, int>> bus[1001];
+
+void dijkstra(int start) {
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({ 0, start });
+    //시작 노드 추가
+    dist[start] = 0;
+    //시작 노드까지의 거리가 0
+
+    while (!pq.empty()) {
+        int cur_dist = pq.top().first;
+        int cur_pos = pq.top().second;
+        //현재 탐색하는 노드와 거리 가져오기
+        pq.pop();
+
+        if (cur_dist > dist[cur_pos]) continue;
+        //현재 노드까지의 거리가 이미 저장된 거리보다 크면 
+        //최단거리가 아니므로 무시
+
+        for (int i = 0; i < bus[cur_pos].size(); i++) {
+            //현재 노드에 인접한 노드들 순회
+            int next_pos = bus[cur_pos][i].first;
+            int next_dist = cur_dist + bus[cur_pos][i].second;
+
+            if (next_dist < dist[next_pos]) {
+                dist[next_pos] = next_dist;
+                pq.push({ next_dist, next_pos });
+            }
+        }
+    }
+}
+
+int main() {
+    cin.tie(0);
+    cout.tie(0);
+    ios_base::sync_with_stdio(0);
+
+    int city_num, bus_num;
+    cin >> city_num >> bus_num;
+    fill(dist, dist + city_num + 1, INT_MAX);
+    //0부터 시작이 아니라 1부터 시작이라 한 개 더 초기화
+
+    for (int i = 0; i < bus_num; i++) {
+        int start, end, weight;
+        cin >> start >> end >> weight;
+        bus[start].push_back({ end, weight });
+    }
+
+    int starting_point, dest;
+    cin >> starting_point >> dest;
+
+    dijkstra(starting_point);
+
+    cout << dist[dest];
+
+    return 0;
+}
+*/
+
+
+
