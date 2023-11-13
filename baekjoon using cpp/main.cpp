@@ -5891,4 +5891,83 @@ int main() {
 */
 
 
+/*
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <queue>
+#include <climits>
+
+//boj 17396
+//이 문제에서 놓쳤던 것이 일반적인 노드 갯수와 간선갯수는 int범위로 커버가 되겠지만 
+//가중치는 최대 100000개의 노드의 각 가중치를 더하면 int로 커버가 안되기에 가중치 관련 변수는 long long으로 해야함.
+
+using namespace std;
+
+int sight[100000] = { 0, };
+long long dist[100000];  
+
+int node_num, edge_num;
+
+vector<pair<int, long long>> node[100000];  
+
+void dijkstra(int start) {
+    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<pair<long long, int>>> pq;
+    dist[start] = 0;
+
+    pq.push({ 0, start });
+
+    while (!pq.empty()) {
+        long long cur_dist = pq.top().first;
+        int cur_pos = pq.top().second;
+        pq.pop();
+
+        if (dist[cur_pos] < cur_dist) continue;
+
+        for (size_t i = 0; i < node[cur_pos].size(); ++i) {
+            int next_pos = node[cur_pos][i].first;
+            long long next_dist = node[cur_pos][i].second + cur_dist;  // long long 타입 사용
+
+            if (next_pos != node_num - 1 && sight[next_pos] == 1) continue;
+
+            if (next_dist < dist[next_pos]) {
+                dist[next_pos] = next_dist;
+                pq.push({ next_dist, next_pos });
+            }
+        }
+    }
+}
+
+int main() {
+    cin >> node_num >> edge_num;
+
+
+    fill(dist, dist + 100000, LLONG_MAX);
+
+    for (int i = 0; i < node_num; ++i) {
+        cin >> sight[i];
+    }
+
+    for (int i = 0; i < edge_num; ++i) {
+        int starting_point, end_point;
+        long long weight;  
+        cin >> starting_point >> end_point >> weight;
+
+        node[starting_point].push_back({ end_point, weight });
+        node[end_point].push_back({ starting_point, weight });
+    }
+
+    dijkstra(0);
+
+    if (dist[node_num - 1] == LLONG_MAX) {
+        cout << -1;
+    }
+    else {
+        cout << dist[node_num - 1];
+    }
+
+    return 0;
+}
+*/
+
 
