@@ -5971,3 +5971,61 @@ int main() {
 */
 
 
+
+/*
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <climits>
+
+
+
+//boj 5972 
+
+using namespace std;
+
+vector<pair<long long, long long>> node[50001];
+long long dist[50001];
+
+void dijkstra(int start) {
+    priority_queue<pair<long long, long long>, vector<pair<long long, long long>>, greater<pair<long long, long long>>> pq;
+    dist[start] = 0;
+    pq.push({ 0, start });
+
+    while (!pq.empty()) {
+        long long cur_dist = pq.top().first;
+        int cur_pos = pq.top().second;
+        pq.pop();
+
+        if (dist[cur_pos] < cur_dist) continue;
+
+        for (size_t i = 0; i < node[cur_pos].size(); i++) {
+            long long cost = cur_dist + node[cur_pos][i].second;
+            if (cost < dist[node[cur_pos][i].first]) {
+                dist[node[cur_pos][i].first] = cost;
+                pq.push({ cost, node[cur_pos][i].first });
+            }
+        }
+    }
+}
+
+int main() {
+    int barn, roads;
+    cin >> barn >> roads;
+
+    for (size_t i = 0; i < roads; ++i) {
+        long long starting_point, end_point, weight;
+        cin >> starting_point >> end_point >> weight;
+        node[starting_point].push_back({ end_point, weight });
+        node[end_point].push_back({ starting_point, weight });
+    }
+
+    fill(dist, dist + barn + 1, LLONG_MAX);
+    dijkstra(1);
+    cout << dist[barn];
+
+    return 0;
+}
+*/
+
