@@ -6029,3 +6029,263 @@ int main() {
 }
 */
 
+/*1351
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+
+unordered_map<long long, long long> hmap;
+long long n, p, q;
+
+long long solve(long long n)
+{
+    if(n == 0) {
+        return 1;
+    }
+
+    if(hmap.find(n) != hmap.end()) {
+        return hmap[n];
+    }
+
+    return hmap[n] = solve(n/p) + solve(n/q);
+
+}
+int main ()
+{
+
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    
+    cin >> n >> p >> q;
+    
+    hmap[0] = 1;
+
+
+    cout << solve(n);
+
+    return 0;
+}
+*/
+
+
+/* 17845
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+typedef struct _subject_info {
+    int importance;
+    int time;
+} subject_info;
+
+subject_info subject[1001];
+int dp[1001][10001];
+int ans;
+
+int main()
+{
+
+    int max_time;
+    int num_subject;
+    
+    cin >> max_time >> num_subject;
+
+    for(size_t  i = 1; i <= num_subject; ++i) {
+        cin >> subject[i].importance >> subject[i].time;
+    }
+
+
+    for(size_t i = 1; i <= num_subject; ++i) {
+        for(size_t j = 0; j <= max_time; ++j) {
+            if(j >= subject[i].time) {
+                dp[i][j] = max(dp[i-1][j], dp[i-1][j - subject[i].time] + subject[i].importance);
+            }
+            else {
+                dp[i][j] = dp[i-1][j];
+            }
+            ans = max(ans, dp[i][j]);
+        }
+    }
+
+
+    cout << ans;
+
+
+
+    return 0;
+}*/
+
+
+/*
+
+#include <iostream>
+#include <algorithm>
+
+//boj 2631
+
+using namespace std;
+int dp[201];
+int arr[201];
+int num;
+int lis;
+
+void solve()
+{
+
+    for(size_t i = 1; i <= num; ++i) {
+        for(size_t j = 1; j <= i; ++j) {
+            if(arr[i] > arr[j]) {
+                dp[i] = max(dp[i], dp[j] + 1);
+            }
+        }
+    }
+
+    for(size_t i = 1; i <= num; ++i) {
+        lis = max(lis, dp[i]);
+    }
+
+}
+int main() 
+{   
+    int ans = 0;
+
+    cin >> num;
+
+    for(size_t i = 0; i <= num; ++i) {
+        dp[i] = 1;
+    }
+
+    for(size_t i = 1; i <= num; ++i) {
+        cin >> arr[i];
+    }
+
+    solve();
+
+    
+    ans = num - lis;
+
+    cout << ans;
+
+
+
+    return 0;
+}
+*/
+
+
+
+
+/*
+#include <iostream>
+#include <algorithm>
+
+//boj 11054
+
+using namespace std;
+
+
+int arr[1001];
+int LIS[1001];
+int rev_LIS[1001];
+int dp[1001];
+int num;
+
+void cal_LIS() 
+{
+
+    for(size_t i = 1; i <= num; ++i) {
+        for(size_t j = 1; j <= i; ++j) {
+            if(arr[i] > arr[j]) {
+                LIS[i] = max(LIS[i], LIS[j] + 1);
+            }
+        }
+    }
+
+}
+
+void cal_rev_LIS()
+{
+    for(size_t i = num; i >= 1; --i) {
+        for(size_t j = num; j >= i; --j) {
+            if(arr[i] > arr[j]) {
+                rev_LIS[i] = max(rev_LIS[i], rev_LIS[j] + 1);
+            }
+        }
+    }
+}
+
+int solve()
+{
+
+    int ret = 0;
+    for(size_t i = 1; i <= num; ++i) {
+        int tmp = LIS[i] + rev_LIS[i];
+        ret = max(ret, tmp);
+    }
+
+    return ret - 1;
+
+}
+int main() {
+    cin >> num;
+    int ans;
+    for(size_t i = 1; i <= num; ++i) {
+        cin >> arr[i];
+        LIS[i] = 1;
+        rev_LIS[i] = 1;
+    }
+
+    cal_LIS();
+    cal_rev_LIS();
+    ans = solve();
+
+
+
+    cout << ans; 
+    return 0;
+}
+
+*/
+
+
+/*
+#include <iostream>
+#include <algorithm>
+
+//boj 15486
+using namespace std;
+
+int T[1500002];
+int P[1500002];
+int dp[1500002];
+int main() {
+
+
+    int ret = 0;
+    int day_num;
+    cin >> day_num;
+
+    for(size_t i = 1; i <= day_num; ++i) {
+        cin >> T[i] >> P[i];
+    }
+
+    for(size_t i = 1; i <= day_num + 1; ++i) {
+        
+        
+        ret = max(ret, dp[i]);
+        if(i + T[i] > day_num + 1) {
+            continue;
+        }
+        dp[i + T[i]] = max(ret + P[i], dp[i+T[i]]);
+        
+    }
+
+    cout << ret;
+
+
+
+    return 0;
+}*/
+
